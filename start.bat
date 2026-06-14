@@ -1,0 +1,3 @@
+@echo off
+title School Finance Manager — Starting...
+powershell -ExecutionPolicy Bypass -File "%~dp0start.ps1"
