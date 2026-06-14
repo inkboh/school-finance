@@ -1,0 +1,266 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../server/node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum Role {
+  SUPER_ADMIN    // user management only; read-only financials
+  CASHIER        // enter fee receipts; cannot approve anything
+  FINANCE_MANAGER // approve receipts/payments; enter & approve expenses
+  PRINCIPAL      // approve large expenses; full read-only view
+  AUDITOR        // full read-only + audit trail
+}
+
+enum TxStatus {
+  PENDING_APPROVAL
+  APPROVED
+  REJECTED
+}
+
+enum LoanType {
+  BORROWED  // school borrowed money (from bank, owner, etc.)
+  LENT      // school lent money (e.g. parent payment plan)
+}
+
+enum LoanStatus {
+  ACTIVE
+  PAID
+  DEFAULTED
+  WRITTEN_OFF
+}
+
+enum PaymentMethod {
+  CASH
+  BANK_TRANSFER
+  CHEQUE
+  MOBILE_MONEY
+  CARD
+  OTHER
+}
+
+// ─── Users & Auth ─────────────────────────────────────────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         Role
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  refreshTokens        RefreshToken[]
+  auditLogs            AuditLog[]
+  createdReceipts      FeeReceipt[]    @relation("ReceiptCreatedBy")
+  approvedReceipts     FeeReceipt[]    @relation("ReceiptApprovedBy")
+  createdExpenses      Expense[]       @relation("ExpenseCreatedBy")
+  approvedExpenses     Expense[]       @relation("ExpenseApprovedBy")
+  createdLoans         Loan[]          @relation("LoanCreatedBy")
+  createdLoanPayments  LoanPayment[]   @relation("LoanPaymentCreatedBy")
+  approvedLoanPayments LoanPayment[]   @relation("LoanPaymentApprovedBy")
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── Currencies & Exchange Rates ──────────────────────────────────────────────
+
+model Currency {
+  id             String   @id @default(cuid())
+  code           String   @unique // ISO 4217: USD, NGN, KES, GHS…
+  name           String
+  symbol         String
+  isBaseCurrency Boolean  @default(false)
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+
+  exchangeRates ExchangeRate[]
+  feeReceipts   FeeReceipt[]
+  expenses      Expense[]
+  loans         Loan[]
+  loanPayments  LoanPayment[]
+}
+
+model ExchangeRate {
+  id             String   @id @default(cuid())
+  currencyId     String   // the non-base currency
+  rate           Decimal  @db.Decimal(18, 6) // 1 unit of this currency = rate base-currency units
+  effectiveDate  DateTime
+  createdAt      DateTime @default(now())
+
+  currency Currency @relation(fields: [currencyId], references: [id])
+
+  @@unique([currencyId, effectiveDate])
+}
+
+// ─── Fee Receipts (Cash In) ───────────────────────────────────────────────────
+
+model FeeCategory {
+  id          String   @id @default(cuid())
+  name        String   @unique // Tuition, Registration, PTA Levy, Exam Fee…
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  receipts FeeReceipt[]
+}
+
+model FeeReceipt {
+  id            String        @id @default(cuid())
+  receiptNumber String        @unique
+  studentName   String
+  studentId     String?
+  grade         String?
+  categoryId    String
+  amount        Decimal       @db.Decimal(18, 4)
+  currencyId    String
+  exchangeRate  Decimal       @db.Decimal(18, 6) @default(1)
+  amountBase    Decimal       @db.Decimal(18, 4) // in base currency
+  paymentDate   DateTime
+  paymentMethod PaymentMethod
+  reference     String?       // cheque no., transfer ref, etc.
+  notes         String?
+  status        TxStatus      @default(PENDING_APPROVAL)
+
+  createdById    String
+  approvedById   String?
+  approvedAt     DateTime?
+  rejectedReason String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  category   FeeCategory @relation(fields: [categoryId], references: [id])
+  currency   Currency    @relation(fields: [currencyId], references: [id])
+  createdBy  User        @relation("ReceiptCreatedBy", fields: [createdById], references: [id])
+  approvedBy User?       @relation("ReceiptApprovedBy", fields: [approvedById], references: [id])
+}
+
+// ─── Expenses (Cash Out) ──────────────────────────────────────────────────────
+
+model ExpenseCategory {
+  id          String   @id @default(cuid())
+  name        String   @unique // Salaries, Utilities, Maintenance, Supplies…
+  parentId    String?           // support sub-categories (e.g. Salaries > Teaching Staff)
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  parent   ExpenseCategory?  @relation("SubCategories", fields: [parentId], references: [id])
+  children ExpenseCategory[] @relation("SubCategories")
+  expenses Expense[]
+}
+
+model Expense {
+  id            String        @id @default(cuid())
+  expenseNumber String        @unique
+  categoryId    String
+  description   String
+  vendor        String?
+  amount        Decimal       @db.Decimal(18, 4)
+  currencyId    String
+  exchangeRate  Decimal       @db.Decimal(18, 6) @default(1)
+  amountBase    Decimal       @db.Decimal(18, 4)
+  expenseDate   DateTime
+  paymentMethod PaymentMethod
+  reference     String?
+  notes         String?
+  status        TxStatus      @default(PENDING_APPROVAL)
+
+  createdById    String
+  approvedById   String?
+  approvedAt     DateTime?
+  rejectedReason String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  category   ExpenseCategory @relation(fields: [categoryId], references: [id])
+  currency   Currency        @relation(fields: [currencyId], references: [id])
+  createdBy  User            @relation("ExpenseCreatedBy", fields: [createdById], references: [id])
+  approvedBy User?           @relation("ExpenseApprovedBy", fields: [approvedById], references: [id])
+}
+
+// ─── Loans ────────────────────────────────────────────────────────────────────
+
+model Loan {
+  id           String     @id @default(cuid())
+  loanNumber   String     @unique
+  loanType     LoanType
+  partyName    String     // lender (if BORROWED) or borrower (if LENT)
+  partyContact String?
+  purpose      String?
+  principal    Decimal    @db.Decimal(18, 4)
+  currencyId   String
+  interestRate Decimal?   @db.Decimal(6, 4) // annual %; null = interest-free
+  loanDate     DateTime
+  dueDate      DateTime?
+  status       LoanStatus @default(ACTIVE)
+  notes        String?
+
+  createdById String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  currency  Currency      @relation(fields: [currencyId], references: [id])
+  createdBy User          @relation("LoanCreatedBy", fields: [createdById], references: [id])
+  payments  LoanPayment[]
+}
+
+model LoanPayment {
+  id            String        @id @default(cuid())
+  paymentNumber String        @unique
+  loanId        String
+  amount        Decimal       @db.Decimal(18, 4)
+  currencyId    String
+  exchangeRate  Decimal       @db.Decimal(18, 6) @default(1)
+  amountBase    Decimal       @db.Decimal(18, 4)
+  paymentDate   DateTime
+  paymentMethod PaymentMethod
+  reference     String?
+  notes         String?
+  status        TxStatus      @default(PENDING_APPROVAL)
+
+  createdById  String
+  approvedById String?
+  approvedAt   DateTime?
+
+  createdAt DateTime @default(now())
+
+  loan       Loan     @relation(fields: [loanId], references: [id])
+  currency   Currency @relation(fields: [currencyId], references: [id])
+  createdBy  User     @relation("LoanPaymentCreatedBy", fields: [createdById], references: [id])
+  approvedBy User?    @relation("LoanPaymentApprovedBy", fields: [approvedById], references: [id])
+}
+
+// ─── Audit Trail (immutable) ──────────────────────────────────────────────────
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String
+  action     String   // LOGIN, LOGOUT, CREATE, UPDATE, APPROVE, REJECT, DEACTIVATE
+  entityType String   // FeeReceipt | Expense | Loan | LoanPayment | User | Currency | …
+  entityId   String?
+  oldValue   Json?
+  newValue   Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
