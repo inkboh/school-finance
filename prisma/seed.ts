@@ -8,13 +8,26 @@ async function main() {
 
   // ── Currencies ──────────────────────────────────────────────────────────────
 
-  const usd = await prisma.currency.upsert({
+  // Make GHS the base currency (Riverdale Academy operates in Ghana)
+  await prisma.currency.upsert({
     where: { code: 'USD' },
-    update: {},
+    update: { isBaseCurrency: false },
     create: {
       code: 'USD',
       name: 'US Dollar',
       symbol: '$',
+      isBaseCurrency: false,
+      isActive: true,
+    },
+  })
+
+  const ghs = await prisma.currency.upsert({
+    where: { code: 'GHS' },
+    update: { isBaseCurrency: true },
+    create: {
+      code: 'GHS',
+      name: 'Ghanaian Cedi',
+      symbol: '₵',
       isBaseCurrency: true,
       isActive: true,
     },
@@ -31,6 +44,8 @@ async function main() {
       isActive: true,
     },
   })
+
+  void ghs // used by import script
 
   // Seed an initial exchange rate for NGN (1 NGN = 0.00065 USD approx)
   await prisma.exchangeRate.upsert({

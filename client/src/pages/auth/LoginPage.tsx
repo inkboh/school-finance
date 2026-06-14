@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useNavigate } from 'react-router-dom'
-import { Landmark, Eye, EyeOff, Loader2 } from 'lucide-react'
+import { Eye, EyeOff, Loader2 } from 'lucide-react'
 import { authApi } from '../../lib/api'
 import { useAuthStore } from '../../store/auth.store'
 
@@ -47,11 +47,13 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Logo / Brand */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 backdrop-blur mb-4">
-            <Landmark className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-3xl font-bold text-white">School Finance</h1>
-          <p className="text-primary-200 mt-1 text-sm">Secure financial management system</p>
+          <img
+            src="/logo.jpg"
+            alt="Riverdale Academy"
+            className="w-24 h-24 rounded-full object-cover mx-auto mb-4 shadow-lg border-4 border-white/20"
+          />
+          <h1 className="text-3xl font-bold text-white">Riverdale Academy</h1>
+          <p className="text-primary-200 mt-1 text-sm italic">Dream it, Believe it, Achieve it</p>
         </div>
 
         {/* Card */}

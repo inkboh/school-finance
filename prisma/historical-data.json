@@ -1,0 +1,2691 @@
+{
+  "feeReceipts": [
+    {
+      "studentName": "Tua Atuahene Poku Obrempong",
+      "amount": 400.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Tua Atuahene Poku Obrempong",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Tua Atuahene Poku Obrempong",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Tua Atuahene Poku Obrempong",
+      "amount": 400.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Tua Atuahene Poku Obrempong",
+      "amount": 400.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Tua Atuahene Poku Obrempong",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Tua Atuahene Poku Obrempong",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Tua Atuahene Poku Obrempong",
+      "amount": 400.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nana Akosua Nti Afriyie",
+      "amount": 400.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nana Akosua Nti Afriyie",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nana Akosua Nti Afriyie",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nana Akosua Nti Afriyie",
+      "amount": 400.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nana Akosua Nti Afriyie",
+      "amount": 400.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nana Akosua Nti Afriyie",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nana Akosua Nti Afriyie",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Agyemang Ohemaa Gyamfua",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Agyemang Ohemaa Gyamfua",
+      "amount": 400.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Kendra Nana Yaa Konadu",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Kendra Nana Yaa Konadu",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Kendra Nana Yaa Konadu",
+      "amount": 400.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Attah Mensah Nana Boateng",
+      "amount": 400.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Attah Mensah Nana Boateng",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Attah Mensah Nana Boateng",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Attah Mensah Nana Boateng",
+      "amount": 400.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Attah Mensah Nana Boateng",
+      "amount": 400.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Attah Mensah Nana Boateng",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Attah Mensah Nana Boateng",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Attah Mensah Nana Boateng",
+      "amount": 400.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Frimpong Abena Serwaa",
+      "amount": 400.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Frimpong Abena Serwaa",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Frimpong Abena Serwaa",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Frimpong Abena Serwaa",
+      "amount": 400.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Frimpong Abena Serwaa",
+      "amount": 400.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Frimpong Abena Serwaa",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Frimpong Abena Serwaa",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Frimpong Abena Serwaa",
+      "amount": 350.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ayama Elizabeth",
+      "amount": 400.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ayama Elizabeth",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ayama Elizabeth",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ayama Elizabeth",
+      "amount": 400.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ayama Elizabeth",
+      "amount": 250.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Apenten Kofi Elisha",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Apenten Kofi Elisha",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Apenten Kofi Elisha",
+      "amount": 400.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Apenten Kofi Elisha",
+      "amount": 400.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Apenten Kofi Elisha",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Apenten Kofi Elisha",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Apenten Kofi Elisha",
+      "amount": 400.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Anim Yeboah Beatrice",
+      "amount": 400.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Anim Yeboah Beatrice",
+      "amount": 400.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Anim Yeboah Beatrice",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Anim Yeboah Beatrice",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Anim Yeboah Beatrice",
+      "amount": 200.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Oppong Fosu Eric",
+      "amount": 400.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Oppong Fosu Eric",
+      "amount": 400.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Oppong Fosu Eric",
+      "amount": 400.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Tua Atuahene Poku Obrempong",
+      "amount": 400.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Tua Atuahene Poku Obrempong",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Tua Atuahene Poku Obrempong",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Tua Atuahene Poku Obrempong",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Tua Atuahene Poku Obrempong",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jantuah Asare Michael",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ackah Esi Zoya",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Katakyie Adubofuor Barima",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Agyemang Ohemaa Gyamfua",
+      "amount": 400.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Agyemang Ohemaa Gyamfua",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Agyemang Ohemaa Gyamfua",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Agyemang Ohemaa Gyamfua",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Agyemang Ohemaa Gyamfua",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Agyemang Ohemaa Gyamfua",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Attah Mensah Nana Boateng",
+      "amount": 400.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Attah Mensah Nana Boateng",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Attah Mensah Nana Boateng",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Attah Mensah Nana Boateng",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Attah Mensah Nana Boateng",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Arthur Forson Jayla",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyametease Annin Yeboah",
+      "amount": 300.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Nyamedome Annin Yeboah",
+      "amount": 300.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Devine Ryker",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Frimpong Abena Serwaa",
+      "amount": 400.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Frimpong Abena Serwaa",
+      "amount": 100.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boakye Agyemang Spencer Nana Eshun",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Ayama Elizabeth",
+      "amount": 200.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Antwi Bosiako Raphael",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Apenten Kofi Elisha",
+      "amount": 400.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Apenten Kofi Elisha",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Apenten Kofi Elisha",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Apenten Kofi Elisha",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Apenten Kofi Elisha",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Apenten Kofi Elisha",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Anim Yeboah Beatrice",
+      "amount": 400.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Anim Yeboah Beatrice",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Anim Yeboah Beatrice",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Oppong Fosu Eric",
+      "amount": 350.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Benjamin Kweku",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Benjamin Kweku",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Benjamin Kweku",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Benjamin Kweku",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Benjamin Kweku",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Samuel Asare",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Samuel Asare",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Samuel Asare",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Samuel Asare",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Samuel Asare",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Sharif Mujaheed",
+      "amount": 400.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Sharif Mujaheed",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Sharif Mujaheed",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Sharif Mujaheed",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Sharif Mujaheed",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Lilibeth",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Lilibeth",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Lilibeth",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Lilibeth",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Annin Yeboah",
+      "amount": 300.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Annin Yeboah",
+      "amount": 300.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Annin Yeboah",
+      "amount": 300.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Jayden kekeli Kpodo",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Kiara manu",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Carysel Kwarteng",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Carysel Kwarteng",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Boatemaa",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Liana",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "studentName": "Liana",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    }
+  ],
+  "expenses": [
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1333.3,
+      "date": "2024-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 2000.0,
+      "date": "2024-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 2000.0,
+      "date": "2024-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 2000.0,
+      "date": "2024-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 2000.0,
+      "date": "2024-09-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 2000.0,
+      "date": "2024-10-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 2000.0,
+      "date": "2024-11-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 2000.0,
+      "date": "2024-12-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 533.3,
+      "date": "2024-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2024-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2024-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2024-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2024-09-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2024-10-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2024-11-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2024-12-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 229.5,
+      "date": "2024-09-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 460.0,
+      "date": "2024-10-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 230.0,
+      "date": "2024-11-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 230.0,
+      "date": "2024-12-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 230.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 230.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 230.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 230.0,
+      "date": "2025-04-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 230.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 230.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 230.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 230.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Food",
+      "amount": 562.0,
+      "date": "2024-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Food",
+      "amount": 130.0,
+      "date": "2024-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Food",
+      "amount": 130.0,
+      "date": "2024-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Food",
+      "amount": 200.0,
+      "date": "2024-09-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Food",
+      "amount": 301.0,
+      "date": "2024-11-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Food",
+      "amount": 1299.0,
+      "date": "2024-12-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Food",
+      "amount": 200.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Food",
+      "amount": 30.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Food",
+      "amount": 150.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 7910.0,
+      "date": "2024-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 510.0,
+      "date": "2024-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 2495.0,
+      "date": "2024-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 350.0,
+      "date": "2024-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 700.0,
+      "date": "2024-09-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 1550.0,
+      "date": "2024-10-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 400.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 500.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 100.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 150.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 950.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Internet",
+      "description": "Telephone",
+      "amount": 130.0,
+      "date": "2025-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 917.0,
+      "date": "2024-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 650.0,
+      "date": "2024-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 280.0,
+      "date": "2024-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 4200.0,
+      "date": "2024-09-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 8410.0,
+      "date": "2024-10-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 750.0,
+      "date": "2024-11-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 900.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 600.0,
+      "date": "2025-02-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 200.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 350.0,
+      "date": "2025-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 400.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Education supplies/equipment",
+      "amount": 420.0,
+      "date": "2024-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Education supplies/equipment",
+      "amount": 650.0,
+      "date": "2024-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Education supplies/equipment",
+      "amount": 13957.0,
+      "date": "2024-09-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Education supplies/equipment",
+      "amount": 949.0,
+      "date": "2024-10-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Education supplies/equipment",
+      "amount": 450.0,
+      "date": "2024-11-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Education supplies/equipment",
+      "amount": 3500.0,
+      "date": "2025-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Education supplies/equipment",
+      "amount": 5000.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Transport",
+      "description": "Transportation",
+      "amount": 700.0,
+      "date": "2024-05-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Transport",
+      "description": "Transportation",
+      "amount": 350.0,
+      "date": "2024-06-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Transport",
+      "description": "Transportation",
+      "amount": 400.0,
+      "date": "2024-07-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Transport",
+      "description": "Transportation",
+      "amount": 200.0,
+      "date": "2024-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Transport",
+      "description": "Transportation",
+      "amount": 1300.0,
+      "date": "2024-09-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Transport",
+      "description": "Transportation",
+      "amount": 300.0,
+      "date": "2024-12-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Transport",
+      "description": "Transportation",
+      "amount": 200.0,
+      "date": "2025-01-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Transport",
+      "description": "Transportation",
+      "amount": 200.0,
+      "date": "2025-03-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Transport",
+      "description": "Transportation",
+      "amount": 300.0,
+      "date": "2025-08-15T00:00:00Z",
+      "academicYear": "2024-2025",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Head Teacher",
+      "amount": 1500.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Teaching Staff Salaries",
+      "description": "Teachers",
+      "amount": 800.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 400.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (var.  payroll only)",
+      "amount": 400.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Food",
+      "amount": 220.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Food",
+      "amount": 40.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (fixed payroll only)",
+      "amount": 230.0,
+      "date": "2025-09-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (fixed payroll only)",
+      "amount": 230.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (fixed payroll only)",
+      "amount": 230.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (fixed payroll only)",
+      "amount": 230.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (fixed payroll only)",
+      "amount": 230.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Support Staff Salaries",
+      "description": "Payroll taxes & benefits (fixed payroll only)",
+      "amount": 230.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 1400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 800.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Building Repairs",
+      "description": "Repairs & maintenance",
+      "amount": 100.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 500.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 400.0,
+      "date": "2025-12-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 380.0,
+      "date": "2026-01-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Office supplies/equipment",
+      "amount": 320.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Education supplies/equipment",
+      "amount": 595.0,
+      "date": "2025-10-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Office Supplies",
+      "description": "Education supplies/equipment",
+      "amount": 900.0,
+      "date": "2026-02-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    },
+    {
+      "category": "Transport",
+      "description": "Transportation",
+      "amount": 400.0,
+      "date": "2025-11-15T00:00:00Z",
+      "academicYear": "2025-2026",
+      "paymentMethod": "CASH"
+    }
+  ],
+  "summary": {
+    "feeReceiptsCount": 241,
+    "expensesCount": 124,
+    "totalFeeAmount": 92250.0,
+    "totalExpenseAmount": 130171.1
+  }
+}

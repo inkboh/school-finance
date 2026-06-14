@@ -96,12 +96,10 @@ export default function AppLayout() {
   const sidebar = (
     <aside className="flex h-full w-60 flex-col bg-slate-800">
       {/* Logo / school name */}
-      <div className="flex h-16 shrink-0 items-center gap-2 border-b border-slate-700 px-5">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600">
-          <Landmark size={16} className="text-white" />
-        </div>
-        <span className="truncate text-sm font-semibold text-white">
-          {user?.schoolName ?? 'School Finance'}
+      <div className="flex h-16 shrink-0 items-center gap-3 border-b border-slate-700 px-4">
+        <img src="/logo.jpg" alt="Riverdale Academy" className="h-10 w-10 rounded-full object-cover shrink-0" />
+        <span className="truncate text-sm font-semibold text-white leading-tight">
+          Riverdale Academy
         </span>
       </div>
 
