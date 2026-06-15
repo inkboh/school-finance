@@ -55,6 +55,7 @@ export async function handler(event: unknown, context: unknown): Promise<unknown
     if (ev['action'] === 'import')             return importDataHandler()
     if (ev['action'] === 'importHistorical')   return importHistoricalHandler()
     if (ev['action'] === 'cognitoBootstrap')   return cognitoBootstrapHandler()
+    if (ev['action'] === 'resendInvite')       return resendInviteHandler(ev as { email?: string })
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return httpHandler(event as any, context as any)
@@ -208,6 +209,52 @@ export async function cognitoBootstrapHandler(): Promise<{
     }
 
     return { success: true, users: results }
+  } catch (err: unknown) {
+    const e = err as { message?: string }
+    return { success: false, error: e.message ?? 'Unknown error' }
+  } finally {
+    await db.$disconnect()
+  }
+}
+
+export async function resendInviteHandler(event: { email?: string }): Promise<{
+  success: boolean
+  email?: string
+  error?: string
+}> {
+  await initialize()
+  const { email } = event
+  if (!email) return { success: false, error: 'email is required — payload: {"action":"resendInvite","email":"user@example.com"}' }
+
+  const poolId = process.env.COGNITO_USER_POOL_ID
+  if (!poolId) return { success: false, error: 'COGNITO_USER_POOL_ID not set' }
+
+  const { PrismaClient } = await import('@prisma/client')
+  const {
+    CognitoIdentityProviderClient,
+    AdminCreateUserCommand,
+  } = await import('@aws-sdk/client-cognito-identity-provider')
+
+  const db = new PrismaClient()
+  const cog = new CognitoIdentityProviderClient({ region: process.env.AWS_REGION ?? 'us-east-1' })
+
+  try {
+    const user = await db.user.findUnique({ where: { email } })
+    if (!user) return { success: false, error: `User ${email} not found in database` }
+
+    await cog.send(new AdminCreateUserCommand({
+      UserPoolId: poolId,
+      Username: email,
+      MessageAction: 'RESEND',
+      UserAttributes: [
+        { Name: 'email', Value: email },
+        { Name: 'email_verified', Value: 'true' },
+        { Name: 'name', Value: user.name },
+        { Name: 'custom:role', Value: user.role },
+      ],
+    }))
+
+    return { success: true, email }
   } catch (err: unknown) {
     const e = err as { message?: string }
     return { success: false, error: e.message ?? 'Unknown error' }

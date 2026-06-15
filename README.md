@@ -165,6 +165,7 @@ The Lambda function accepts direct invocation for admin tasks. The `deploy.ps1` 
 | `{"action":"import"}` | Import student roster from spreadsheet data |
 | `{"action":"importHistorical"}` | Import historical fee receipts and expenses |
 | `{"action":"cognitoBootstrap"}` | Create all users in Cognito and email each one an invitation with a temp password |
+| `{"action":"resendInvite","email":"user@example.com"}` | Resend the Cognito invitation email to a specific user |
 
 ### Infrastructure (CDK — `infra/`)
 
