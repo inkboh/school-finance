@@ -85,6 +85,44 @@ export interface FeeReceipt {
   approvedBy?: { name: string }
 }
 
+// ─── Fee Tracker ──────────────────────────────────────────────────────────────
+
+export type MonthPaymentStatus = 'PAID' | 'PENDING' | 'UNPAID' | 'NOT_ENROLLED' | 'UPCOMING'
+
+export interface MonthPayment {
+  status: MonthPaymentStatus
+  receiptId?: string
+  receiptNumber?: string
+  amount?: number
+}
+
+export interface FeeTrackerRow {
+  studentDbId: string
+  studentId: string
+  firstName: string
+  lastName: string
+  grade: string
+  studentStatus: string
+  enrolledFrom: string
+  payments: Record<string, MonthPayment>
+}
+
+export interface FeeTrackerSummary {
+  paid: number
+  pending: number
+  unpaid: number
+  upcoming: number
+  totalCollected: number
+}
+
+export interface FeeTrackerData {
+  year: string
+  months: string[]
+  currentMonth: string
+  rows: FeeTrackerRow[]
+  summary: Record<string, FeeTrackerSummary>
+}
+
 export interface Expense {
   id: string
   expenseNumber: string

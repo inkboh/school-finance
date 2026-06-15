@@ -3,6 +3,7 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
   Receipt,
+  LayoutGrid,
   CreditCard,
   Landmark,
   ClipboardList,
@@ -24,14 +25,16 @@ interface NavItem {
   label: string;
   to: string;
   icon: React.ReactNode;
+  end?: boolean;
   allowedRoles?: string[];
   hiddenRoles?: string[];
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'Dashboard',    to: '/dashboard',   icon: <LayoutDashboard size={18} /> },
-  { label: 'Fee Receipts', to: '/fees',        icon: <Receipt size={18} /> },
-  { label: 'Expenses',     to: '/expenses',    icon: <CreditCard size={18} /> },
+  { label: 'Dashboard',    to: '/dashboard',      icon: <LayoutDashboard size={18} /> },
+  { label: 'Fee Receipts', to: '/fees',           icon: <Receipt size={18} />,     end: true },
+  { label: 'Fee Tracker',  to: '/fees/tracker',   icon: <LayoutGrid size={18} /> },
+  { label: 'Expenses',     to: '/expenses',       icon: <CreditCard size={18} /> },
   { label: 'Loans',        to: '/loans',       icon: <Landmark size={18} /> },
   { label: 'Students',     to: '/students',    icon: <GraduationCap size={18} /> },
   { label: 'Obligations',  to: '/obligations', icon: <ShieldAlert size={18} /> },
@@ -126,6 +129,7 @@ function Sidebar({ onClose }: { onClose?: () => void }) {
           <NavLink
             key={item.to}
             to={item.to}
+            end={item.end}
             className={navLinkClass}
             onClick={onClose}
           >

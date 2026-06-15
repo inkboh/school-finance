@@ -11,6 +11,7 @@ import DashboardPage from './pages/dashboard/DashboardPage'
 import FeesListPage from './pages/fees/FeesListPage'
 import NewFeeReceiptPage from './pages/fees/NewFeeReceiptPage'
 import FeeReceiptDetailPage from './pages/fees/FeeReceiptDetailPage'
+import FeeTrackerPage from './pages/fees/FeeTrackerPage'
 import ExpensesListPage from './pages/expenses/ExpensesListPage'
 import NewExpensePage from './pages/expenses/NewExpensePage'
 import ExpenseDetailPage from './pages/expenses/ExpenseDetailPage'
@@ -68,6 +69,7 @@ export default function App() {
 
             {/* Fee Receipts */}
             <Route path="/fees" element={<FeesListPage />} />
+            <Route path="/fees/tracker" element={<FeeTrackerPage />} />
             <Route
               path="/fees/new"
               element={

@@ -4,6 +4,7 @@ import { PaymentMethod } from '@prisma/client'
 export const CreateFeeReceiptSchema = z.object({
   studentName: z.string().min(1),
   studentId: z.string().optional(),
+  studentRef: z.string().optional(), // DB Student.id — links receipt to student profile
   grade: z.string().optional(),
   categoryId: z.string().cuid(),
   amount: z.number().positive(),
@@ -11,6 +12,7 @@ export const CreateFeeReceiptSchema = z.object({
   exchangeRate: z.number().positive().default(1),
   paymentDate: z.string().datetime(),
   paymentMethod: z.nativeEnum(PaymentMethod),
+  termId: z.string().optional(),
   reference: z.string().optional(),
   notes: z.string().optional(),
 })

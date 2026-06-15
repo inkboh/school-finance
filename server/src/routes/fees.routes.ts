@@ -10,11 +10,15 @@ import {
   approveReceipt,
   rejectReceipt,
 } from '../controllers/fees.controller'
+import { getFeeTracker } from '../controllers/fees.tracker.controller'
 
 const router = Router()
 
 // All fees routes require authentication
 router.use(authenticate)
+
+// GET /api/fees/tracker — monthly payment status matrix (must be before /:id)
+router.get('/tracker', getFeeTracker)
 
 // GET /api/fees — all authenticated roles
 router.get('/', validateQuery(ListQuerySchema), listReceipts)

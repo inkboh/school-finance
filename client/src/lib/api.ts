@@ -6,6 +6,7 @@ import type {
   CashFlowPoint,
   RecentActivity,
   FeeReceipt,
+  FeeTrackerData,
   Expense,
   Loan,
   LoanPayment,
@@ -143,7 +144,7 @@ export const feesApi = {
   list: (params?: Record<string, unknown>): Promise<ApiResponse<FeeReceipt[]>> =>
     api.get('/fees', { params }).then((r) => r.data),
 
-  create: (data: Partial<FeeReceipt>): Promise<ApiResponse<FeeReceipt>> =>
+  create: (data: Partial<FeeReceipt> & { studentRef?: string; termId?: string }): Promise<ApiResponse<FeeReceipt>> =>
     api.post('/fees', data).then((r) => r.data),
 
   get: (id: string): Promise<ApiResponse<FeeReceipt>> =>
@@ -154,6 +155,9 @@ export const feesApi = {
 
   reject: (id: string, reason: string): Promise<ApiResponse<FeeReceipt>> =>
     api.post(`/fees/${id}/reject`, { reason }).then((r) => r.data),
+
+  tracker: (params?: { year?: string }): Promise<ApiResponse<FeeTrackerData>> =>
+    api.get('/fees/tracker', { params }).then((r) => r.data),
 }
 
 // ─── Expenses API ─────────────────────────────────────────────────────────────
