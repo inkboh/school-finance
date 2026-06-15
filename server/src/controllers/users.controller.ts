@@ -1,5 +1,12 @@
 import { Response } from 'express'
 import { Role } from '@prisma/client'
+import {
+  CognitoIdentityProviderClient,
+  AdminCreateUserCommand,
+  AdminUpdateUserAttributesCommand,
+  AdminEnableUserCommand,
+  AdminDisableUserCommand,
+} from '@aws-sdk/client-cognito-identity-provider'
 import { prisma } from '../services/prisma.service'
 import { hashPassword } from '../services/auth.service'
 import { audit } from '../services/audit.service'
@@ -15,6 +22,17 @@ const USER_SELECT = {
   isActive: true,
   createdAt: true,
 } as const
+
+let cognitoClient: CognitoIdentityProviderClient | null = null
+
+function getCognito(): { client: CognitoIdentityProviderClient; poolId: string } | null {
+  const poolId = process.env.COGNITO_USER_POOL_ID
+  if (!poolId) return null
+  if (!cognitoClient) {
+    cognitoClient = new CognitoIdentityProviderClient({ region: process.env.AWS_REGION ?? 'us-east-1' })
+  }
+  return { client: cognitoClient, poolId }
+}
 
 // GET /users
 export const listUsers = async (req: AuthRequest, res: Response): Promise<void> => {
@@ -34,12 +52,7 @@ export const listUsers = async (req: AuthRequest, res: Response): Promise<void> 
     res.json({
       success: true,
       data: users,
-      meta: {
-        page,
-        limit,
-        total,
-        totalPages: Math.ceil(total / limit),
-      },
+      meta: { page, limit, total, totalPages: Math.ceil(total / limit) },
     })
   } catch (err) {
     res.status(500).json({ success: false, error: 'Failed to fetch users', details: err })
@@ -54,12 +67,18 @@ export const createUser = async (req: AuthRequest, res: Response): Promise<void>
       res.status(400).json({
         success: false,
         error: 'Validation failed',
-        details: parsed.error.errors.map((e) => ({ field: e.path.join('.'), message: e.message })),
+        details: parsed.error!.errors.map((e) => ({ field: e.path.join('.'), message: e.message ?? '' })),
       })
       return
     }
 
     const { email, name, password, role } = parsed.data
+    const cog = getCognito()
+
+    if (!cog && !password) {
+      res.status(400).json({ success: false, error: 'Password is required' })
+      return
+    }
 
     const existing = await prisma.user.findUnique({ where: { email } })
     if (existing) {
@@ -67,7 +86,32 @@ export const createUser = async (req: AuthRequest, res: Response): Promise<void>
       return
     }
 
-    const passwordHash = await hashPassword(password)
+    // Create in Cognito first — sends invite email to the user
+    if (cog) {
+      try {
+        await cog.client.send(new AdminCreateUserCommand({
+          UserPoolId: cog.poolId,
+          Username: email,
+          UserAttributes: [
+            { Name: 'email', Value: email },
+            { Name: 'email_verified', Value: 'true' },
+            { Name: 'name', Value: name },
+            { Name: 'custom:role', Value: String(role) },
+          ],
+          DesiredDeliveryMediums: ['EMAIL'],
+        }))
+      } catch (err: unknown) {
+        const e = err as { name?: string }
+        if (e.name !== 'UsernameExistsException') {
+          console.error('[users.createUser] Cognito error:', err)
+          res.status(500).json({ success: false, error: 'Failed to create user in Cognito' })
+          return
+        }
+        // Username already exists in Cognito — still create/sync the DB record
+      }
+    }
+
+    const passwordHash = (password !== undefined) ? await hashPassword(password) : '[cognito]'
 
     const user = await prisma.user.create({
       data: { email, name, passwordHash, role },
@@ -100,7 +144,7 @@ export const updateUser = async (req: AuthRequest, res: Response): Promise<void>
       res.status(400).json({
         success: false,
         error: 'Validation failed',
-        details: parsed.error.errors.map((e) => ({ field: e.path.join('.'), message: e.message })),
+        details: parsed.error!.errors.map((e) => ({ field: e.path.join('.'), message: e.message ?? '' })),
       })
       return
     }
@@ -113,7 +157,6 @@ export const updateUser = async (req: AuthRequest, res: Response): Promise<void>
       return
     }
 
-    // If changing email, check it is not taken by another user
     if (email && email !== existing.email) {
       const taken = await prisma.user.findUnique({ where: { email } })
       if (taken) {
@@ -131,6 +174,22 @@ export const updateUser = async (req: AuthRequest, res: Response): Promise<void>
       },
       select: USER_SELECT,
     })
+
+    // Best-effort Cognito sync — DB update already succeeded
+    const cog = getCognito()
+    if (cog) {
+      const attrs = []
+      if (name !== undefined) attrs.push({ Name: 'name', Value: name })
+      if (role !== undefined) attrs.push({ Name: 'custom:role', Value: role })
+      if (email !== undefined && email !== existing.email) attrs.push({ Name: 'email', Value: email })
+      if (attrs.length > 0) {
+        cog.client.send(new AdminUpdateUserAttributesCommand({
+          UserPoolId: cog.poolId,
+          Username: existing.email,
+          UserAttributes: attrs,
+        })).catch((err: unknown) => console.error('[users.updateUser] Cognito sync failed:', err))
+      }
+    }
 
     audit({
       userId: req.user.sub,
@@ -154,7 +213,6 @@ export const toggleUserStatus = async (req: AuthRequest, res: Response): Promise
   try {
     const { id } = req.params as { id: string }
 
-    // Cannot toggle your own account
     if (req.user.sub === id) {
       res.status(400).json({ success: false, error: 'You cannot change the status of your own account' })
       return
@@ -166,16 +224,12 @@ export const toggleUserStatus = async (req: AuthRequest, res: Response): Promise
       return
     }
 
-    // Guard: cannot deactivate the last active SUPER_ADMIN
     if (target.isActive && target.role === Role.SUPER_ADMIN) {
       const activeSuperAdminCount = await prisma.user.count({
         where: { role: Role.SUPER_ADMIN, isActive: true },
       })
       if (activeSuperAdminCount <= 1) {
-        res.status(400).json({
-          success: false,
-          error: 'Cannot deactivate the last active SUPER_ADMIN',
-        })
+        res.status(400).json({ success: false, error: 'Cannot deactivate the last active SUPER_ADMIN' })
         return
       }
     }
@@ -188,6 +242,14 @@ export const toggleUserStatus = async (req: AuthRequest, res: Response): Promise
       data: { isActive: newIsActive },
       select: USER_SELECT,
     })
+
+    // Best-effort Cognito sync
+    const cog = getCognito()
+    if (cog) {
+      const Command = newIsActive ? AdminEnableUserCommand : AdminDisableUserCommand
+      cog.client.send(new Command({ UserPoolId: cog.poolId, Username: target.email }))
+        .catch((err: unknown) => console.error('[users.toggleUserStatus] Cognito sync failed:', err))
+    }
 
     audit({
       userId: req.user.sub,

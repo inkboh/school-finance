@@ -6,6 +6,9 @@ import * as authCtrl from '../controllers/auth.controller'
 
 const router = Router()
 
+// GET /api/auth/config — public, returns Cognito pool/client IDs for frontend
+router.get('/config', authCtrl.getConfig)
+
 // POST /api/auth/login
 router.post('/login', validate(LoginSchema), authCtrl.login)
 

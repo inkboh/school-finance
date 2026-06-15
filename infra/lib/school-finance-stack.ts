@@ -9,6 +9,8 @@ import * as integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations'
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront'
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins'
 import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager'
+import * as cognito from 'aws-cdk-lib/aws-cognito'
+import * as iam from 'aws-cdk-lib/aws-iam'
 import { Construct } from 'constructs'
 import * as path from 'path'
 
@@ -91,6 +93,46 @@ export class SchoolFinanceStack extends cdk.Stack {
       description: 'JWT refresh token signing secret',
     })
 
+    // ── Cognito UserPool ─────────────────────────────────────────────────────────
+    const userPool = new cognito.UserPool(this, 'UserPool', {
+      userPoolName: 'SchoolFinanceUsers',
+      selfSignUpEnabled: false,
+      signInAliases: { email: true },
+      autoVerify: { email: true },
+      standardAttributes: {
+        email: { required: true, mutable: true },
+        fullname: { required: false, mutable: true },
+      },
+      customAttributes: {
+        role: new cognito.StringAttribute({ mutable: true }),
+      },
+      passwordPolicy: {
+        minLength: 8,
+        requireDigits: true,
+        requireUppercase: true,
+        requireLowercase: true,
+        requireSymbols: true,
+      },
+      accountRecovery: cognito.AccountRecovery.EMAIL_ONLY,
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
+    })
+
+    const userPoolClient = new cognito.UserPoolClient(this, 'UserPoolClient', {
+      userPool,
+      userPoolClientName: 'SchoolFinanceWebClient',
+      authFlows: { userPassword: true, userSrp: true },
+      generateSecret: false,
+      accessTokenValidity: cdk.Duration.hours(1),
+      idTokenValidity: cdk.Duration.hours(1),
+      refreshTokenValidity: cdk.Duration.days(30),
+      readAttributes: new cognito.ClientAttributes()
+        .withStandardAttributes({ email: true, fullname: true })
+        .withCustomAttributes('role'),
+      writeAttributes: new cognito.ClientAttributes()
+        .withStandardAttributes({ email: true, fullname: true })
+        .withCustomAttributes('role'),
+    })
+
     // ── S3 — Document Uploads ────────────────────────────────────────────────────
     const uploadsBucket = new s3.Bucket(this, 'UploadsBucket', {
       bucketName: `schoolfinance-uploads-${this.account}`,
@@ -133,17 +175,31 @@ export class SchoolFinanceStack extends cdk.Stack {
         DB_HOST:             db.instanceEndpoint.hostname,
         DB_PORT:             db.dbInstanceEndpointPort,
         DB_NAME:             'schoolfinance',
-        JWT_SECRET_ARN:      jwtSecret.secretArn,
-        REFRESH_SECRET_ARN:  refreshSecret.secretArn,
-        UPLOADS_BUCKET:      uploadsBucket.bucketName,
+        JWT_SECRET_ARN:               jwtSecret.secretArn,
+        REFRESH_SECRET_ARN:           refreshSecret.secretArn,
+        UPLOADS_BUCKET:               uploadsBucket.bucketName,
+        COGNITO_USER_POOL_ID:         userPool.userPoolId,
+        COGNITO_USER_POOL_CLIENT_ID:  userPoolClient.userPoolClientId,
       },
     })
 
-    // Grant Lambda access to secrets and S3
+    // Grant Lambda access to secrets, S3, and Cognito admin operations
     db.secret!.grantRead(apiFunction)
     jwtSecret.grantRead(apiFunction)
     refreshSecret.grantRead(apiFunction)
     uploadsBucket.grantReadWrite(apiFunction)
+    apiFunction.addToRolePolicy(new iam.PolicyStatement({
+      actions: [
+        'cognito-idp:AdminCreateUser',
+        'cognito-idp:AdminUpdateUserAttributes',
+        'cognito-idp:AdminEnableUser',
+        'cognito-idp:AdminDisableUser',
+        'cognito-idp:AdminSetUserPassword',
+        'cognito-idp:AdminGetUser',
+        'cognito-idp:ListUsers',
+      ],
+      resources: [userPool.userPoolArn],
+    }))
 
     // ── API Gateway HTTP API ─────────────────────────────────────────────────────
     const httpApi = new apigwv2.HttpApi(this, 'HttpApi', {
@@ -223,6 +279,14 @@ export class SchoolFinanceStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'DbSecretArn', {
       value: db.secret!.secretArn,
       description: 'Secrets Manager ARN for DB credentials',
+    })
+    new cdk.CfnOutput(this, 'UserPoolId', {
+      value: userPool.userPoolId,
+      description: 'Cognito User Pool ID',
+    })
+    new cdk.CfnOutput(this, 'UserPoolClientId', {
+      value: userPoolClient.userPoolClientId,
+      description: 'Cognito User Pool Client ID',
     })
   }
 }

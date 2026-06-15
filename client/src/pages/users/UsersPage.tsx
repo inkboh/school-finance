@@ -114,27 +114,21 @@ function Modal({
   )
 }
 
-// ─── Add user form ────────────────────────────────────────────────────────────
+// ─── Invite user form ─────────────────────────────────────────────────────────
 
-interface AddUserFormData {
+interface InviteUserFormData {
   name: string
   email: string
-  password: string
   role: Role
 }
 
 function AddUserModal({ onClose }: { onClose: () => void }) {
   const qc = useQueryClient()
-  const [form, setForm] = useState<AddUserFormData>({
-    name: '',
-    email: '',
-    password: '',
-    role: 'CASHIER',
-  })
-  const [errors, setErrors] = useState<Partial<Record<keyof AddUserFormData, string>>>({})
+  const [form, setForm] = useState<InviteUserFormData>({ name: '', email: '', role: 'CASHIER' })
+  const [errors, setErrors] = useState<Partial<Record<keyof InviteUserFormData, string>>>({})
 
   const createMutation = useMutation({
-    mutationFn: (d: Partial<User> & { password?: string }) => usersApi.create(d),
+    mutationFn: (d: Partial<User>) => usersApi.create(d),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['users'] })
       onClose()
@@ -142,14 +136,11 @@ function AddUserModal({ onClose }: { onClose: () => void }) {
   })
 
   function validate(): boolean {
-    const errs: Partial<Record<keyof AddUserFormData, string>> = {}
+    const errs: Partial<Record<keyof InviteUserFormData, string>> = {}
     if (!form.name.trim()) errs.name = 'Name is required.'
     if (!form.email.trim()) errs.email = 'Email is required.'
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       errs.email = 'Enter a valid email address.'
-    if (!form.password) errs.password = 'Password is required.'
-    else if (form.password.length < 8)
-      errs.password = 'Password must be at least 8 characters.'
     if (!form.role) errs.role = 'Role is required.'
     setErrors(errs)
     return Object.keys(errs).length === 0
@@ -161,7 +152,6 @@ function AddUserModal({ onClose }: { onClose: () => void }) {
     createMutation.mutate({
       name: form.name.trim(),
       email: form.email.trim().toLowerCase(),
-      password: form.password,
       role: form.role,
     })
   }
@@ -172,9 +162,14 @@ function AddUserModal({ onClose }: { onClose: () => void }) {
     'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20'
 
   return (
-    <Modal title="Add User" onClose={onClose}>
+    <Modal title="Invite User" onClose={onClose}>
       <form onSubmit={handleSubmit} noValidate>
         <div className="flex flex-col gap-4">
+          <div className="rounded-lg bg-blue-50 border border-blue-200 px-3 py-2.5 text-xs text-blue-700">
+            An invitation email will be sent with a temporary password. The user must set a
+            permanent password on first sign-in.
+          </div>
+
           <FormField label="Name" required error={errors.name} htmlFor="add-name">
             <input
               id="add-name"
@@ -199,23 +194,6 @@ function AddUserModal({ onClose }: { onClose: () => void }) {
             />
           </FormField>
 
-          <FormField
-            label="Password"
-            required
-            error={errors.password}
-            htmlFor="add-password"
-            hint="At least 8 characters."
-          >
-            <input
-              id="add-password"
-              type="password"
-              value={form.password}
-              onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
-              className={inputClass}
-              autoComplete="new-password"
-            />
-          </FormField>
-
           <FormField label="Role" required error={errors.role} htmlFor="add-role">
             <select
               id="add-role"
@@ -234,7 +212,7 @@ function AddUserModal({ onClose }: { onClose: () => void }) {
 
         {createMutation.isError && (
           <p className="mt-3 text-xs text-red-600">
-            Failed to create user. The email may already be in use.
+            Failed to invite user. The email may already be in use.
           </p>
         )}
 
@@ -251,7 +229,7 @@ function AddUserModal({ onClose }: { onClose: () => void }) {
             disabled={createMutation.isPending}
             className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
           >
-            {createMutation.isPending ? 'Creating…' : 'Create User'}
+            {createMutation.isPending ? 'Sending invite…' : 'Invite User'}
           </button>
         </div>
       </form>
@@ -510,7 +488,7 @@ export default function UsersPage() {
             className="flex items-center gap-1.5 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-brand-700"
           >
             <Plus size={15} />
-            Add User
+            Invite User
           </button>
         }
       />

@@ -14,8 +14,9 @@ export const ChangePasswordSchema = z.object({
 export const CreateUserSchema = z.object({
   email: z.string().email(),
   name: z.string().min(2),
-  password: z.string().min(8),
   role: z.nativeEnum(Role),
+  // password only required in local-dev mode; Cognito manages credentials in production
+  password: z.string().min(8).optional(),
 })
 
 export const UpdateUserSchema = z.object({

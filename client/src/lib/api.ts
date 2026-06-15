@@ -1,5 +1,5 @@
 import axios, { type AxiosRequestConfig } from 'axios'
-import { useAuthStore, getAccessToken, getRefreshToken } from '../store/auth.store'
+import { useAuthStore, getAccessToken, getRefreshToken, getCognitoAccessToken } from '../store/auth.store'
 import type {
   ApiResponse,
   DashboardSummary,
@@ -66,22 +66,33 @@ api.interceptors.response.use(
       if (!refreshPromise) {
         refreshPromise = (async () => {
           const refreshToken = getRefreshToken()
-          const { data } = await axios.post<{
-            accessToken: string
-            refreshToken: string
-          }>('/api/auth/refresh', { refreshToken })
+          if (!refreshToken) throw new Error('No refresh token')
 
+          const { isCognitoEnabled, cognitoRefresh } = await import('./cognito')
+
+          if (isCognitoEnabled()) {
+            const { idToken, accessToken: cognitoAt } = await cognitoRefresh(refreshToken)
+            const { setAuth } = useAuthStore.getState()
+            const currentUser = useAuthStore.getState().user
+            if (currentUser) {
+              setAuth(currentUser, idToken, refreshToken, cognitoAt)
+            }
+            return idToken
+          }
+
+          const { data } = await axios.post<{ data: { accessToken: string; refreshToken: string } }>(
+            '/api/auth/refresh',
+            { refreshToken },
+          )
           const { setAuth, logout } = useAuthStore.getState()
           const currentUser = useAuthStore.getState().user
-
-          if (data.accessToken && currentUser) {
-            setAuth(currentUser, data.accessToken, data.refreshToken ?? refreshToken ?? '')
+          if (data.data.accessToken && currentUser) {
+            setAuth(currentUser, data.data.accessToken, data.data.refreshToken ?? refreshToken)
           } else {
             logout()
             window.location.href = '/login'
           }
-
-          return data.accessToken
+          return data.data.accessToken
         })().finally(() => {
           refreshPromise = null
         })
@@ -106,8 +117,15 @@ export const authApi = {
   login: (email: string, password: string): Promise<ApiResponse<{ user: User; accessToken: string; refreshToken: string }>> =>
     api.post('/auth/login', { email, password }).then((r) => r.data),
 
-  logout: (): Promise<void> =>
-    api.post('/auth/logout', { refreshToken: getRefreshToken() }).then(() => undefined),
+  logout: async (): Promise<void> => {
+    const { isCognitoEnabled, cognitoSignOut } = await import('./cognito')
+    if (isCognitoEnabled()) {
+      const at = getCognitoAccessToken()
+      if (at) await cognitoSignOut(at)
+    } else {
+      await api.post('/auth/logout', { refreshToken: getRefreshToken() })
+    }
+  },
 
   me: (): Promise<ApiResponse<User>> =>
     api.get('/auth/me').then((r) => r.data),

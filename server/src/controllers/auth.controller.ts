@@ -14,6 +14,20 @@ import { audit } from '../services/audit.service';
 import { AuthRequest } from '../types';
 import { LoginSchema, ChangePasswordSchema } from '../schemas/auth.schemas';
 
+// ─── Cognito Config ───────────────────────────────────────────────────────────
+
+export const getConfig = (_req: Request, res: Response): void => {
+  const userPoolId = process.env.COGNITO_USER_POOL_ID
+  const clientId = process.env.COGNITO_USER_POOL_CLIENT_ID
+  const region = process.env.AWS_REGION ?? 'us-east-1'
+
+  if (userPoolId && clientId) {
+    res.json({ success: true, data: { userPoolId, clientId, region } })
+  } else {
+    res.json({ success: true, data: null })
+  }
+}
+
 // ─── Login ────────────────────────────────────────────────────────────────────
 
 export const login = async (req: Request, res: Response): Promise<void> => {
@@ -136,8 +150,6 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
 
     await revokeRefreshToken(token);
 
-    // Best-effort audit — we may not have an authenticated user here, so guard gracefully
-    const stored = await prisma.refreshToken.findUnique({ where: { token } }).catch(() => null);
     // Token was already revoked above; attempt to find the user id from the JWT directly
     let userId: string | undefined;
     try {

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthStore } from './store/auth.store'
+import { loadCognitoConfig } from './lib/cognito'
 
 import ProtectedRoute from './components/layout/ProtectedRoute'
 import AppLayout from './components/layout/AppLayout'
@@ -50,6 +51,7 @@ export default function App() {
 
   useEffect(() => {
     loadFromStorage()
+    loadCognitoConfig()
     document.title = 'School Finance Manager'
   }, [loadFromStorage])
 
