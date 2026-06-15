@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+﻿import React, { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Plus, Check, Pencil, X, Info } from 'lucide-react'
 import { settingsApi } from '../../lib/api'
@@ -9,10 +9,10 @@ import { PageHeader, FormField } from '../../components/shared'
 // ─── Shared input/select styles ───────────────────────────────────────────────
 
 const inputClass =
-  'w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 shadow-sm placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200 disabled:bg-slate-50 disabled:text-slate-400'
+  'w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 shadow-sm placeholder:text-slate-400 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20 disabled:bg-slate-50 disabled:text-slate-400'
 
 const selectClass =
-  'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200'
+  'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20'
 
 // ─── Toggle Switch ────────────────────────────────────────────────────────────
 
@@ -36,8 +36,8 @@ function ToggleSwitch({
       disabled={disabled}
       onClick={() => onChange(!checked)}
       className={[
-        'relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2',
-        checked ? 'bg-indigo-600' : 'bg-slate-200',
+        'relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2',
+        checked ? 'bg-brand-600' : 'bg-slate-200',
         disabled ? 'cursor-not-allowed opacity-50' : '',
       ].join(' ')}
     >
@@ -69,7 +69,7 @@ function Tab({
       className={[
         'whitespace-nowrap border-b-2 px-4 py-3 text-sm font-medium transition-colors',
         active
-          ? 'border-indigo-600 text-indigo-600'
+          ? 'border-brand-200 text-brand-600'
           : 'border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700',
       ].join(' ')}
     >
@@ -88,13 +88,13 @@ function AddCard({
   onCancel: () => void
 }) {
   return (
-    <div className="mb-4 rounded-lg border border-indigo-200 bg-indigo-50 p-4">
+    <div className="mb-4 rounded-lg border border-brand-200 bg-brand-50 p-4">
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1">{children}</div>
         <button
           type="button"
           onClick={onCancel}
-          className="mt-0.5 rounded-md p-1 text-slate-400 hover:bg-indigo-100 hover:text-slate-600"
+          className="mt-0.5 rounded-md p-1 text-slate-400 hover:bg-brand-100 hover:text-slate-600"
           aria-label="Cancel"
         >
           <X size={16} />
@@ -257,7 +257,7 @@ function CurrenciesTab() {
                     onChange={(e) =>
                       setForm((f) => ({ ...f, isBaseCurrency: e.target.checked }))
                     }
-                    className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+                    className="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500"
                   />
                   <span className="text-sm text-slate-600">Set as base</span>
                 </label>
@@ -267,7 +267,7 @@ function CurrenciesTab() {
               <button
                 type="submit"
                 disabled={createMutation.isPending}
-                className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+                className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
               >
                 {createMutation.isPending ? 'Saving…' : 'Add Currency'}
               </button>
@@ -287,7 +287,7 @@ function CurrenciesTab() {
           type="button"
           onClick={() => setShowAdd(true)}
           disabled={showAdd}
-          className="flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+          className="flex items-center gap-1.5 rounded-lg bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
         >
           <Plus size={15} />
           Add Currency
@@ -318,7 +318,7 @@ function CurrenciesTab() {
                 <td className="px-4 py-3 text-slate-700">{c.symbol}</td>
                 <td className="px-4 py-3">
                   {c.isBaseCurrency ? (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-200">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-2.5 py-0.5 text-xs font-medium text-brand-700 ring-1 ring-inset ring-brand-200">
                       <Check size={11} />
                       Base
                     </span>
@@ -414,7 +414,7 @@ function ExchangeRatesTab() {
           <form onSubmit={handleSubmit}>
             {selectedCurrency && baseCurrency && (
               <div className="mb-3 flex items-center gap-2 rounded-md bg-white/80 px-3 py-2 text-xs text-slate-600 ring-1 ring-slate-200">
-                <Info size={13} className="shrink-0 text-indigo-400" />
+                <Info size={13} className="shrink-0 text-brand-400" />
                 1 unit of {selectedCurrency.code} = {form.rate || '?'}{' '}
                 {baseCurrency.code}
               </div>
@@ -468,7 +468,7 @@ function ExchangeRatesTab() {
               <button
                 type="submit"
                 disabled={createMutation.isPending}
-                className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+                className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
               >
                 {createMutation.isPending ? 'Saving…' : 'Add Rate'}
               </button>
@@ -485,7 +485,7 @@ function ExchangeRatesTab() {
           type="button"
           onClick={() => setShowAdd(true)}
           disabled={showAdd}
-          className="flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+          className="flex items-center gap-1.5 rounded-lg bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
         >
           <Plus size={15} />
           Add Rate
@@ -631,7 +631,7 @@ function FeeCategoriesTab() {
               <button
                 type="submit"
                 disabled={createMutation.isPending}
-                className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+                className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
               >
                 {createMutation.isPending ? 'Saving…' : 'Add Category'}
               </button>
@@ -648,7 +648,7 @@ function FeeCategoriesTab() {
           type="button"
           onClick={() => setShowAdd(true)}
           disabled={showAdd}
-          className="flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+          className="flex items-center gap-1.5 rounded-lg bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
         >
           <Plus size={15} />
           Add Category
@@ -672,7 +672,7 @@ function FeeCategoriesTab() {
             ))
           : cats.map((cat) =>
               editingId === cat.id ? (
-                <tr key={cat.id} className="bg-indigo-50">
+                <tr key={cat.id} className="bg-brand-50">
                   <td colSpan={4} className="px-4 py-3">
                     <form onSubmit={(e) => handleEdit(e, cat.id)}>
                       <div className="grid gap-3 sm:grid-cols-2">
@@ -711,7 +711,7 @@ function FeeCategoriesTab() {
                         <button
                           type="submit"
                           disabled={updateMutation.isPending}
-                          className="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+                          className="rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
                         >
                           {updateMutation.isPending ? 'Saving…' : 'Save'}
                         </button>
@@ -892,7 +892,7 @@ function ExpenseCategoriesTab() {
               <button
                 type="submit"
                 disabled={createMutation.isPending}
-                className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+                className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
               >
                 {createMutation.isPending ? 'Saving…' : 'Add Category'}
               </button>
@@ -909,7 +909,7 @@ function ExpenseCategoriesTab() {
           type="button"
           onClick={() => setShowAdd(true)}
           disabled={showAdd}
-          className="flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+          className="flex items-center gap-1.5 rounded-lg bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
         >
           <Plus size={15} />
           Add Category
@@ -933,7 +933,7 @@ function ExpenseCategoriesTab() {
             ))
           : cats.map((cat) =>
               editingId === cat.id ? (
-                <tr key={cat.id} className="bg-indigo-50">
+                <tr key={cat.id} className="bg-brand-50">
                   <td colSpan={5} className="px-4 py-3">
                     <form onSubmit={(e) => handleEdit(e, cat.id)}>
                       <div className="grid gap-3 sm:grid-cols-3">
@@ -994,7 +994,7 @@ function ExpenseCategoriesTab() {
                         <button
                           type="submit"
                           disabled={updateMutation.isPending}
-                          className="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+                          className="rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
                         >
                           {updateMutation.isPending ? 'Saving…' : 'Save'}
                         </button>

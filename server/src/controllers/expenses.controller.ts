@@ -34,7 +34,7 @@ export const listExpenses = async (req: AuthRequest, res: Response): Promise<voi
     const page  = parseInt(pageStr  ?? '1',  10)
     const limit = parseInt(limitStr ?? '20', 10)
 
-    const where: Parameters<typeof prisma.expense.findMany>[0]['where'] = {}
+    const where: NonNullable<Parameters<typeof prisma.expense.findMany>[0]>['where'] = {}
 
     if (status)     where.status     = status as TxStatus
     if (categoryId) where.categoryId = categoryId

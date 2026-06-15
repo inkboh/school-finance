@@ -250,7 +250,7 @@ export const createPayment = async (req: AuthRequest, res: Response): Promise<vo
     const payment = await prisma.loanPayment.create({
       data: {
         paymentNumber,
-        loanId: id,
+        loanId: id!,
         amount: body.data.amount,
         currencyId: body.data.currencyId,
         exchangeRate: body.data.exchangeRate,

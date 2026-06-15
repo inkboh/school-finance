@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+﻿import React, { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -159,7 +159,7 @@ export default function NewExpensePage() {
       'w-full rounded-lg border px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2',
       hasError
         ? 'border-red-400 focus:border-red-400 focus:ring-red-300'
-        : 'border-slate-300 focus:border-indigo-400 focus:ring-indigo-300',
+        : 'border-slate-300 focus:border-brand-400 focus:ring-brand-400/20',
     ].join(' ')
 
   // ── Render ───────────────────────────────────────────────────────────────────
@@ -432,7 +432,7 @@ export default function NewExpensePage() {
           <button
             type="submit"
             disabled={isSubmitting || createMutation.isPending}
-            className="rounded-lg bg-indigo-600 px-5 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
+            className="rounded-lg bg-brand-600 px-5 py-2 text-sm font-medium text-white shadow-sm hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 disabled:opacity-50"
           >
             {createMutation.isPending ? 'Saving…' : 'Submit Expense'}
           </button>

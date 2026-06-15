@@ -1,0 +1,13 @@
+node_modules
+client
+server/node_modules
+server/dist
+.git
+.env
+*.log
+prisma/migrations
+prisma/*.py
+prisma/*.ts
+prisma/*.json
+infra
+reference_docs

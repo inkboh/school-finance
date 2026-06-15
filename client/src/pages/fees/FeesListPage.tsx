@@ -95,16 +95,16 @@ function RejectModal({ isOpen, receiptNumber, onConfirm, onClose }: RejectModalP
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="relative z-10 w-full max-w-md rounded-xl bg-white shadow-xl">
+      <div className="relative z-10 w-full max-w-md rounded-2xl bg-white shadow-2xl border border-slate-100 animate-scale-in">
         <div className="p-6">
           <h2
             id="reject-modal-title"
-            className="text-base font-semibold text-slate-900"
+            className="text-base font-bold text-slate-900"
           >
             Reject Receipt
           </h2>
           <p className="mt-1 text-sm text-slate-500">
-            Provide a reason for rejecting <span className="font-medium">{receiptNumber}</span>.
+            Provide a reason for rejecting <span className="font-semibold text-slate-700">{receiptNumber}</span>.
           </p>
 
           <textarea
@@ -113,15 +113,11 @@ function RejectModal({ isOpen, receiptNumber, onConfirm, onClose }: RejectModalP
             onChange={(e) => setReason(e.target.value)}
             rows={4}
             placeholder="Enter rejection reason..."
-            className="mt-4 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+            className="input mt-4 resize-none"
           />
 
           <div className="mt-4 flex justify-end gap-3">
-            <button
-              type="button"
-              onClick={onClose}
-              className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
-            >
+            <button type="button" onClick={onClose} className="btn-secondary">
               Cancel
             </button>
             <button
@@ -133,7 +129,7 @@ function RejectModal({ isOpen, receiptNumber, onConfirm, onClose }: RejectModalP
                   onClose()
                 }
               }}
-              className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+              className="btn-danger"
             >
               Reject
             </button>
@@ -337,30 +333,28 @@ export default function FeesListPage() {
               type="button"
               title="View receipt"
               onClick={() => navigate(`/fees/${row.id}`)}
-              className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-indigo-600 hover:bg-indigo-50"
+              className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold text-brand-600 hover:bg-brand-50 transition-colors"
             >
               <Eye size={13} />
               View
             </button>
 
-            {/* Approve */}
             {canApprove(row) && (
               <button
                 type="button"
                 title="Approve receipt"
                 onClick={() => setApproveTarget(row)}
-                className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-emerald-700 hover:bg-emerald-50"
+                className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold text-emerald-700 hover:bg-emerald-50 transition-colors"
               >
                 <CheckCircle size={13} />
                 Approve
               </button>
             )}
 
-            {/* Disabled approve with tooltip for self-created */}
             {approvalBlocked && (
               <span
                 title="Separation of duties: you cannot approve a receipt you created."
-                className="inline-flex cursor-not-allowed items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-slate-400"
+                className="inline-flex cursor-not-allowed items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold text-slate-300"
               >
                 <CheckCircle size={13} />
                 Approve
@@ -368,13 +362,12 @@ export default function FeesListPage() {
               </span>
             )}
 
-            {/* Reject */}
             {canApprove(row) && (
               <button
                 type="button"
                 title="Reject receipt"
                 onClick={() => setRejectTarget(row)}
-                className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-red-700 hover:bg-red-50"
+                className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold text-red-600 hover:bg-red-50 transition-colors"
               >
                 <XCircle size={13} />
                 Reject
@@ -395,7 +388,7 @@ export default function FeesListPage() {
             <button
               type="button"
               onClick={() => navigate('/fees/new')}
-              className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="btn-primary"
             >
               <Plus size={16} />
               New Receipt
@@ -405,95 +398,76 @@ export default function FeesListPage() {
       />
 
       {/* Filter bar */}
-      <div className="flex flex-wrap items-end gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-        {/* Status */}
+      <div className="flex flex-wrap items-end gap-3 rounded-2xl border border-slate-100 bg-white p-4 shadow-card">
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-medium text-slate-500">Status</label>
+          <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Status</label>
           <select
             value={statusFilter}
-            onChange={(e) => {
-              setStatusFilter(e.target.value as TxStatus | '')
-              handleFilterChange()
-            }}
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+            onChange={(e) => { setStatusFilter(e.target.value as TxStatus | ''); handleFilterChange() }}
+            className="input py-2"
           >
             {STATUS_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
+              <option key={o.value} value={o.value}>{o.label}</option>
             ))}
           </select>
         </div>
 
-        {/* Category */}
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-medium text-slate-500">Category</label>
+          <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Category</label>
           <select
             value={categoryFilter}
-            onChange={(e) => {
-              setCategoryFilter(e.target.value)
-              handleFilterChange()
-            }}
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+            onChange={(e) => { setCategoryFilter(e.target.value); handleFilterChange() }}
+            className="input py-2"
           >
             <option value="">All Categories</option>
             {categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
+              <option key={c.id} value={c.id}>{c.name}</option>
             ))}
           </select>
         </div>
 
-        {/* Date from */}
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-medium text-slate-500">Date From</label>
+          <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Date From</label>
           <input
             type="date"
             value={dateFrom}
-            onChange={(e) => {
-              setDateFrom(e.target.value)
-              handleFilterChange()
-            }}
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+            onChange={(e) => { setDateFrom(e.target.value); handleFilterChange() }}
+            className="input py-2"
           />
         </div>
 
-        {/* Date to */}
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-medium text-slate-500">Date To</label>
+          <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Date To</label>
           <input
             type="date"
             value={dateTo}
-            onChange={(e) => {
-              setDateTo(e.target.value)
-              handleFilterChange()
-            }}
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+            onChange={(e) => { setDateTo(e.target.value); handleFilterChange() }}
+            className="input py-2"
           />
         </div>
 
-        {/* Search */}
         <div className="flex flex-1 flex-col gap-1">
-          <label className="text-xs font-medium text-slate-500">Search</label>
+          <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Search</label>
           <input
             type="search"
             value={searchRaw}
             onChange={(e) => setSearchRaw(e.target.value)}
             placeholder="Student name, receipt #..."
-            className="min-w-[180px] rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+            className="input min-w-[180px] py-2"
           />
         </div>
       </div>
 
       {/* Table */}
-      <DataTable
-        columns={columns}
-        data={receipts}
-        isLoading={isLoading}
-        emptyMessage="No fee receipts found."
-        rowKey={(row) => row.id}
-      />
+      <div className="rounded-2xl bg-white border border-slate-100 shadow-card overflow-hidden">
+        <DataTable
+          columns={columns}
+          data={receipts}
+          isLoading={isLoading}
+          emptyMessage="No fee receipts found."
+          rowKey={(row) => row.id}
+        />
+      </div>
 
       {/* Pagination */}
       {meta && meta.totalPages > 1 && (

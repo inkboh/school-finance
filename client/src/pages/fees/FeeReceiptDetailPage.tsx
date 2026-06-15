@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+﻿import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { ArrowLeft, CheckCircle, XCircle, User, Calendar, CreditCard, FileText, Hash } from 'lucide-react'
@@ -64,7 +64,7 @@ function RejectModal({ isOpen, receiptNumber, onConfirm, onClose }: RejectModalP
             onChange={(e) => setReason(e.target.value)}
             rows={4}
             placeholder="Enter rejection reason..."
-            className="mt-4 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
+            className="mt-4 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
             autoFocus
           />
 

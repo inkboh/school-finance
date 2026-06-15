@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useNavigate } from 'react-router-dom'
-import { Eye, EyeOff, Loader2 } from 'lucide-react'
+import { Eye, EyeOff, Loader2, ShieldCheck } from 'lucide-react'
 import { authApi } from '../../lib/api'
 import { useAuthStore } from '../../store/auth.store'
 
@@ -36,41 +36,84 @@ export default function LoginPage() {
         setServerError(res.error ?? 'Login failed')
       }
     } catch (err: unknown) {
-      const msg =
-        err instanceof Error ? err.message : 'Invalid credentials. Please try again.'
+      const msg = err instanceof Error ? err.message : 'Invalid credentials. Please try again.'
       setServerError(msg)
     }
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-900 via-primary-700 to-primary-500 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        {/* Logo / Brand */}
-        <div className="text-center mb-8">
+    <div className="min-h-screen flex">
+      {/* Left panel — branding */}
+      <div className="hidden lg:flex lg:w-1/2 flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 p-12">
+        {/* decorative blobs */}
+        <div className="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-white/5" />
+        <div className="absolute -bottom-32 -right-16 h-96 w-96 rounded-full bg-white/5" />
+        <div className="absolute top-1/3 right-8 h-48 w-48 rounded-full bg-brand-600/30" />
+
+        <div className="relative z-10 flex flex-col items-center text-center max-w-sm">
+          <div className="mb-8 relative">
+            <div className="absolute inset-0 rounded-3xl bg-white/10 blur-xl scale-110" />
+            <img
+              src="/logo.jpg"
+              alt="Riverdale Academy"
+              className="relative w-32 h-32 rounded-3xl object-cover shadow-2xl ring-2 ring-white/20"
+            />
+          </div>
+          <h1 className="text-4xl font-extrabold text-white tracking-tight leading-tight">
+            Riverdale<br />Academy
+          </h1>
+          <p className="mt-3 text-base text-white/60 italic font-medium tracking-wide">
+            Dream it · Believe it · Achieve it
+          </p>
+
+          <div className="mt-12 w-full space-y-4">
+            {[
+              { icon: '🔐', label: 'Strict separation of duties' },
+              { icon: '📊', label: 'Real-time cash flow insights' },
+              { icon: '📋', label: 'Immutable audit trail' },
+              { icon: '💱', label: 'Multi-currency support' },
+            ].map((f) => (
+              <div
+                key={f.label}
+                className="flex items-center gap-3 rounded-xl bg-white/8 border border-white/10 px-4 py-3 text-left"
+              >
+                <span className="text-lg">{f.icon}</span>
+                <span className="text-sm font-medium text-white/80">{f.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Right panel — login form */}
+      <div className="flex w-full lg:w-1/2 flex-col items-center justify-center bg-slate-50 px-6 py-12">
+        {/* Mobile logo */}
+        <div className="flex flex-col items-center mb-8 lg:hidden">
           <img
             src="/logo.jpg"
             alt="Riverdale Academy"
-            className="w-24 h-24 rounded-full object-cover mx-auto mb-4 shadow-lg border-4 border-white/20"
+            className="w-20 h-20 rounded-2xl object-cover shadow-lg mb-3"
           />
-          <h1 className="text-3xl font-bold text-white">Riverdale Academy</h1>
-          <p className="text-primary-200 mt-1 text-sm italic">Dream it, Believe it, Achieve it</p>
+          <h2 className="text-xl font-bold text-slate-900">Riverdale Academy</h2>
+          <p className="text-sm text-slate-500 italic">Dream it · Believe it · Achieve it</p>
         </div>
 
-        {/* Card */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
-          <h2 className="text-xl font-semibold text-gray-800 mb-6">Sign in to your account</h2>
+        <div className="w-full max-w-sm">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Welcome back</h2>
+            <p className="mt-1 text-sm text-slate-500">Sign in to the Finance System</p>
+          </div>
 
           {serverError && (
-            <div className="mb-4 rounded-lg bg-danger-50 border border-danger-200 p-3 text-sm text-danger-700">
-              {serverError}
+            <div className="mb-5 flex items-start gap-2.5 rounded-xl bg-red-50 border border-red-200 p-4 text-sm text-red-700">
+              <span className="text-red-500 mt-0.5">⚠</span>
+              <span>{serverError}</span>
             </div>
           )}
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Email address
-              </label>
+              <label className="label">Email address</label>
               <input
                 type="email"
                 autoComplete="email"
@@ -79,34 +122,38 @@ export default function LoginPage() {
                 className="input"
               />
               {errors.email && (
-                <p className="mt-1 text-xs text-danger-600">{errors.email.message}</p>
+                <p className="form-error">{errors.email.message}</p>
               )}
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+              <label className="label">Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
                   autoComplete="current-password"
                   placeholder="••••••••"
                   {...register('password')}
-                  className="input pr-10"
+                  className="input pr-11"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
               {errors.password && (
-                <p className="mt-1 text-xs text-danger-600">{errors.password.message}</p>
+                <p className="form-error">{errors.password.message}</p>
               )}
             </div>
 
-            <button type="submit" disabled={isSubmitting} className="btn-primary w-full py-2.5">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="btn-primary w-full py-3 text-base mt-2"
+            >
               {isSubmitting ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
@@ -117,11 +164,18 @@ export default function LoginPage() {
               )}
             </button>
           </form>
-        </div>
 
-        <p className="text-center text-primary-200 text-xs mt-6">
-          Contact your system administrator if you need access.
-        </p>
+          <div className="mt-8 flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+            <ShieldCheck size={16} className="text-emerald-500 shrink-0" />
+            <p className="text-xs text-slate-500">
+              All transactions require dual approval for maximum security.
+            </p>
+          </div>
+
+          <p className="text-center text-slate-400 text-xs mt-6">
+            Contact your system administrator if you need access.
+          </p>
+        </div>
       </div>
     </div>
   )

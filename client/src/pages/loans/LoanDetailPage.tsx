@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+﻿import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
@@ -71,7 +71,7 @@ const PAYMENT_METHODS: { value: PaymentMethod; label: string }[] = [
 ]
 
 const inputClass =
-  'w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 disabled:bg-slate-50'
+  'w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20 disabled:bg-slate-50'
 
 const errorInputClass =
   'w-full rounded-lg border border-red-300 bg-white px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-300'
@@ -179,7 +179,7 @@ function PaymentPanel({
         {/* Header */}
         <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
           <div className="flex items-center gap-2">
-            <CreditCard size={18} className="text-indigo-500" />
+            <CreditCard size={18} className="text-brand-600" />
             <h2 className="text-base font-semibold text-slate-900">
               Record Payment
             </h2>
@@ -337,7 +337,7 @@ function PaymentPanel({
             <button
               type="submit"
               disabled={mutation.isPending}
-              className="w-full rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-60"
+              className="w-full rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 disabled:opacity-60"
             >
               {mutation.isPending ? 'Recording…' : 'Record Payment'}
             </button>
@@ -715,7 +715,7 @@ export default function LoanDetailPage() {
                     onChange={(e) =>
                       setNewStatus(e.target.value as LoanStatus | '')
                     }
-                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+                    className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20"
                   >
                     <option value="">Select new status…</option>
                     {LOAN_STATUSES.filter((s) => s.value !== loan.status).map(
@@ -731,7 +731,7 @@ export default function LoanDetailPage() {
                     type="button"
                     disabled={!newStatus || statusMutation.isPending}
                     onClick={() => setStatusConfirmOpen(true)}
-                    className="w-full rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50 transition-colors"
+                    className="w-full rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50 transition-colors"
                   >
                     {statusMutation.isPending ? 'Updating…' : 'Update Status'}
                   </button>
@@ -762,7 +762,7 @@ export default function LoanDetailPage() {
               <button
                 type="button"
                 onClick={() => setPaymentPanelOpen(true)}
-                className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
               >
                 <CreditCard size={14} />
                 Record Payment

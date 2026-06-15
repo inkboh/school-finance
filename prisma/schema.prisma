@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../server/node_modules/.prisma/client"
+  provider      = "prisma-client-js"
+  output        = "../server/node_modules/.prisma/client"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
 }
 
 datasource db {
@@ -66,6 +67,10 @@ model User {
   createdLoans         Loan[]          @relation("LoanCreatedBy")
   createdLoanPayments  LoanPayment[]   @relation("LoanPaymentCreatedBy")
   approvedLoanPayments LoanPayment[]   @relation("LoanPaymentApprovedBy")
+  createdObligPayments ObligationPayment[] @relation("ObligPaymentCreatedBy")
+  approvedObligPayments ObligationPayment[] @relation("ObligPaymentApprovedBy")
+  createdProjects      Project[]       @relation("ProjectCreatedBy")
+  createdDocuments     PolicyDocument[] @relation("DocumentCreatedBy")
 }
 
 model RefreshToken {
@@ -89,11 +94,15 @@ model Currency {
   isActive       Boolean  @default(true)
   createdAt      DateTime @default(now())
 
-  exchangeRates ExchangeRate[]
-  feeReceipts   FeeReceipt[]
-  expenses      Expense[]
-  loans         Loan[]
-  loanPayments  LoanPayment[]
+  exchangeRates       ExchangeRate[]
+  feeReceipts         FeeReceipt[]
+  expenses            Expense[]
+  loans               Loan[]
+  loanPayments        LoanPayment[]
+  obligations         RecurringObligation[]
+  obligationPayments  ObligationPayment[]
+  projects            Project[]
+  projectFundings     ProjectFunding[]
 }
 
 model ExchangeRate {
@@ -145,10 +154,14 @@ model FeeReceipt {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  studentRef String?      // optional link to Student.id
+  termId     String?      // e.g. "2025/2026 Term 1"
+
   category   FeeCategory @relation(fields: [categoryId], references: [id])
   currency   Currency    @relation(fields: [currencyId], references: [id])
   createdBy  User        @relation("ReceiptCreatedBy", fields: [createdById], references: [id])
   approvedBy User?       @relation("ReceiptApprovedBy", fields: [approvedById], references: [id])
+  student    Student?    @relation("StudentReceipts", fields: [studentRef], references: [id])
 }
 
 // ─── Expenses (Cash Out) ──────────────────────────────────────────────────────
@@ -190,10 +203,11 @@ model Expense {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  category   ExpenseCategory @relation(fields: [categoryId], references: [id])
-  currency   Currency        @relation(fields: [currencyId], references: [id])
-  createdBy  User            @relation("ExpenseCreatedBy", fields: [createdById], references: [id])
-  approvedBy User?           @relation("ExpenseApprovedBy", fields: [approvedById], references: [id])
+  category          ExpenseCategory    @relation(fields: [categoryId], references: [id])
+  currency          Currency           @relation(fields: [currencyId], references: [id])
+  createdBy         User               @relation("ExpenseCreatedBy", fields: [createdById], references: [id])
+  approvedBy        User?              @relation("ExpenseApprovedBy", fields: [approvedById], references: [id])
+  obligationPayment ObligationPayment?
 }
 
 // ─── Loans ────────────────────────────────────────────────────────────────────
@@ -246,6 +260,204 @@ model LoanPayment {
   currency   Currency @relation(fields: [currencyId], references: [id])
   createdBy  User     @relation("LoanPaymentCreatedBy", fields: [createdById], references: [id])
   approvedBy User?    @relation("LoanPaymentApprovedBy", fields: [approvedById], references: [id])
+}
+
+// ─── Student Registry ─────────────────────────────────────────────────────────
+
+enum StudentStatus {
+  ACTIVE
+  GRADUATED
+  WITHDRAWN
+  SUSPENDED
+}
+
+model Student {
+  id             String        @id @default(cuid())
+  studentId      String        @unique // RA-2026-0001
+  firstName      String
+  lastName       String
+  grade          String
+  section        String?
+  dateOfBirth    DateTime?
+  enrollmentDate DateTime      @default(now())
+  status         StudentStatus @default(ACTIVE)
+  parentName     String?
+  parentPhone    String?
+  parentEmail    String?
+  parentAddress  String?
+  notes          String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  feeReceipts FeeReceipt[] @relation("StudentReceipts")
+}
+
+// ─── Recurring Obligations ────────────────────────────────────────────────────
+
+enum ObligationCategory {
+  TAX
+  SSNIT
+  INSURANCE
+  LICENSE_PERMIT
+  UTILITY_CONTRACT
+  SERVICE_CONTRACT
+  SUBSCRIPTION
+  OTHER
+}
+
+enum ObligationFrequency {
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  BIANNUALLY
+  ANNUALLY
+  ONCE
+}
+
+model RecurringObligation {
+  id            String              @id @default(cuid())
+  name          String
+  description   String?
+  category      ObligationCategory
+  amount        Decimal             @db.Decimal(18, 4)
+  currencyId    String
+  frequency     ObligationFrequency
+  nextDueDate   DateTime
+  lastPaidDate  DateTime?
+  vendorName    String?
+  vendorContact String?
+  isActive      Boolean             @default(true)
+  notes         String?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  currency  Currency             @relation(fields: [currencyId], references: [id])
+  payments  ObligationPayment[]
+}
+
+model ObligationPayment {
+  id           String    @id @default(cuid())
+  obligationId String
+  expenseId    String?   @unique
+  amount       Decimal   @db.Decimal(18, 4)
+  currencyId   String
+  exchangeRate Decimal   @db.Decimal(18, 6) @default(1)
+  amountBase   Decimal   @db.Decimal(18, 4)
+  paidDate     DateTime
+  paymentMethod PaymentMethod
+  reference    String?
+  notes        String?
+  status       TxStatus  @default(PENDING_APPROVAL)
+  createdById  String
+  approvedById String?
+  approvedAt   DateTime?
+  rejectedReason String?
+  createdAt    DateTime  @default(now())
+
+  obligation RecurringObligation @relation(fields: [obligationId], references: [id])
+  expense    Expense?            @relation(fields: [expenseId], references: [id])
+  currency   Currency            @relation(fields: [currencyId], references: [id])
+  createdBy  User                @relation("ObligPaymentCreatedBy", fields: [createdById], references: [id])
+  approvedBy User?               @relation("ObligPaymentApprovedBy", fields: [approvedById], references: [id])
+}
+
+// ─── Projects ─────────────────────────────────────────────────────────────────
+
+enum ProjectStatus {
+  PLANNING
+  ACTIVE
+  ON_HOLD
+  COMPLETED
+  CANCELLED
+}
+
+enum FundingType {
+  INTERNAL    // school reserves / operations
+  FAMILY_PTA  // parent donations, PTA levy
+  GRANT       // government / NGO grant
+  DONATION    // individual or corporate donation
+  LOAN        // borrowed funds for project
+  OTHER
+}
+
+enum FundingStatus {
+  PLEDGED  // committed but not yet received
+  RECEIVED // funds in hand
+  SPENT    // disbursed on project
+}
+
+model Project {
+  id            String        @id @default(cuid())
+  projectNumber String        @unique // PRJ-2026-001
+  name          String
+  description   String?
+  scope         String?       @db.Text
+  status        ProjectStatus @default(PLANNING)
+  startDate     DateTime?
+  endDate       DateTime?
+  budget        Decimal       @db.Decimal(18, 4)
+  currencyId    String
+  notes         String?
+  createdById   String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  currency  Currency         @relation(fields: [currencyId], references: [id])
+  createdBy User             @relation("ProjectCreatedBy", fields: [createdById], references: [id])
+  funding   ProjectFunding[]
+}
+
+model ProjectFunding {
+  id         String        @id @default(cuid())
+  projectId  String
+  source     String        // "School Reserves", "Parent Contribution", "GES Grant", etc.
+  type       FundingType
+  amount     Decimal       @db.Decimal(18, 4)
+  currencyId String
+  date       DateTime
+  status     FundingStatus @default(PLEDGED)
+  notes      String?
+  createdAt  DateTime      @default(now())
+
+  project  Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  currency Currency @relation(fields: [currencyId], references: [id])
+}
+
+// ─── Policy Documents ─────────────────────────────────────────────────────────
+
+enum DocumentCategory {
+  HR_POLICY
+  ACADEMIC_POLICY
+  FINANCIAL_POLICY
+  SAFETY_POLICY
+  OPERATIONAL
+  GOVERNMENT_CIRCULAR
+  CONTRACT
+  BOARD_RESOLUTION
+  OTHER
+}
+
+model PolicyDocument {
+  id            String           @id @default(cuid())
+  docNumber     String           @unique // DOC-2026-001
+  title         String
+  category      DocumentCategory
+  description   String?
+  content       String?          @db.Text
+  fileUrl       String?          // relative path to uploaded file
+  fileName      String?          // original file name
+  fileSize      Int?             // bytes
+  version       String           @default("1.0")
+  issuedDate    DateTime
+  effectiveDate DateTime
+  expiryDate    DateTime?
+  isActive      Boolean          @default(true)
+  createdById   String
+  notes         String?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  createdBy User @relation("DocumentCreatedBy", fields: [createdById], references: [id])
 }
 
 // ─── Audit Trail (immutable) ──────────────────────────────────────────────────

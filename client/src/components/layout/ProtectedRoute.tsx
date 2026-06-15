@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { ShieldOff } from 'lucide-react';
 import { useAuthStore } from '../../store/auth.store';
@@ -25,7 +25,7 @@ function ForbiddenPage() {
       </div>
       <a
         href="/dashboard"
-        className="mt-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+        className="mt-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600"
       >
         Back to Dashboard
       </a>

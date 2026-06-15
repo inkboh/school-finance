@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+﻿import React, { useState, useCallback } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { PlusCircle, Eye, CheckCircle, XCircle, Search, X } from 'lucide-react'
@@ -212,7 +212,7 @@ export default function ExpensesListPage() {
             <button
               type="button"
               onClick={() => navigate(`/expenses/${row.id}`)}
-              className="rounded p-1.5 text-slate-400 hover:bg-slate-100 hover:text-indigo-600"
+              className="rounded p-1.5 text-slate-400 hover:bg-slate-100 hover:text-brand-600"
               title="View detail"
             >
               <Eye size={15} />
@@ -256,7 +256,7 @@ export default function ExpensesListPage() {
           <button
             type="button"
             onClick={() => navigate('/expenses/new')}
-            className="flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
           >
             <PlusCircle size={16} />
             New Expense
@@ -271,7 +271,7 @@ export default function ExpensesListPage() {
           <select
             value={filters.status}
             onChange={(e) => setFilter('status', e.target.value)}
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+            className="input py-2"
           >
             {STATUS_OPTIONS.map((o) => (
               <option key={o.value} value={o.value}>
@@ -284,7 +284,7 @@ export default function ExpensesListPage() {
           <select
             value={filters.categoryId}
             onChange={(e) => setFilter('categoryId', e.target.value)}
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+            className="input py-2"
           >
             <option value="">All Categories</option>
             {categories.map((cat) => (
@@ -300,7 +300,7 @@ export default function ExpensesListPage() {
             value={filters.dateFrom}
             onChange={(e) => setFilter('dateFrom', e.target.value)}
             placeholder="From date"
-            className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+            className="input py-2"
           />
 
           {/* Date To */}
@@ -309,7 +309,7 @@ export default function ExpensesListPage() {
             value={filters.dateTo}
             onChange={(e) => setFilter('dateTo', e.target.value)}
             placeholder="To date"
-            className="rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+            className="input py-2"
           />
 
           {/* Search */}
@@ -323,7 +323,7 @@ export default function ExpensesListPage() {
               value={filters.search}
               onChange={(e) => setFilter('search', e.target.value)}
               placeholder="Description, vendor, #..."
-              className="w-full rounded-lg border border-slate-300 py-2 pl-9 pr-3 text-sm text-slate-700 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+              className="w-full rounded-lg border border-slate-300 py-2 pl-9 pr-3 text-sm text-slate-700 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20"
             />
           </div>
         </div>

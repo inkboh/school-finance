@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { AlertTriangle, X } from 'lucide-react';
+import { AlertTriangle, CheckCircle, X } from 'lucide-react';
 
 interface ConfirmModalProps {
   isOpen: boolean;
@@ -22,16 +22,13 @@ export default function ConfirmModal({
 }: ConfirmModalProps) {
   const confirmBtnRef = useRef<HTMLButtonElement>(null);
 
-  // Focus the confirm button when the modal opens
   useEffect(() => {
     if (isOpen) {
-      // Small delay to let the element render before focusing
       const id = setTimeout(() => confirmBtnRef.current?.focus(), 50);
       return () => clearTimeout(id);
     }
   }, [isOpen]);
 
-  // Close on Escape key
   useEffect(() => {
     if (!isOpen) return;
     const handler = (e: KeyboardEvent) => {
@@ -43,91 +40,60 @@ export default function ConfirmModal({
 
   if (!isOpen) return null;
 
-  const confirmBtn =
-    confirmVariant === 'danger'
-      ? 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500'
-      : 'bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500';
+  const isDanger = confirmVariant === 'danger';
 
   return (
-    /* Backdrop */
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       aria-modal="true"
       role="dialog"
       aria-labelledby="confirm-modal-title"
     >
-      {/* Dimmed overlay */}
       <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Card */}
-      <div className="relative z-10 w-full max-w-md rounded-xl bg-white shadow-xl">
-        {/* Close button */}
+      <div className="relative z-10 w-full max-w-md rounded-2xl bg-white shadow-2xl border border-slate-100 animate-scale-in">
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-4 top-4 rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+          className="absolute right-4 top-4 btn-icon"
           aria-label="Close modal"
         >
-          <X size={18} />
+          <X size={16} />
         </button>
 
         <div className="p-6">
-          {/* Icon + title */}
           <div className="flex items-start gap-4">
-            <div
-              className={[
-                'flex h-10 w-10 shrink-0 items-center justify-center rounded-full',
-                confirmVariant === 'danger'
-                  ? 'bg-red-100'
-                  : 'bg-indigo-100',
-              ].join(' ')}
-            >
-              <AlertTriangle
-                size={20}
-                className={
-                  confirmVariant === 'danger'
-                    ? 'text-red-600'
-                    : 'text-indigo-600'
-                }
-              />
+            <div className={[
+              'flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl',
+              isDanger ? 'bg-red-100' : 'bg-brand-100',
+            ].join(' ')}>
+              {isDanger
+                ? <AlertTriangle size={20} className="text-red-600" />
+                : <CheckCircle size={20} className="text-brand-600" />
+              }
             </div>
 
-            <div className="min-w-0 flex-1">
-              <h2
-                id="confirm-modal-title"
-                className="text-base font-semibold text-slate-900"
-              >
+            <div className="min-w-0 flex-1 pt-0.5">
+              <h2 id="confirm-modal-title" className="text-base font-bold text-slate-900">
                 {title}
               </h2>
-              <p className="mt-1 text-sm text-slate-500">{message}</p>
+              <p className="mt-1.5 text-sm text-slate-500 leading-relaxed">{message}</p>
             </div>
           </div>
 
-          {/* Action buttons */}
           <div className="mt-6 flex justify-end gap-3">
-            <button
-              type="button"
-              onClick={onClose}
-              className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2"
-            >
+            <button type="button" onClick={onClose} className="btn-secondary">
               Cancel
             </button>
-
             <button
               ref={confirmBtnRef}
               type="button"
-              onClick={() => {
-                onConfirm();
-                onClose();
-              }}
-              className={[
-                'rounded-lg px-4 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2',
-                confirmBtn,
-              ].join(' ')}
+              onClick={() => { onConfirm(); onClose(); }}
+              className={isDanger ? 'btn-danger' : 'btn-primary'}
             >
               {confirmLabel}
             </button>

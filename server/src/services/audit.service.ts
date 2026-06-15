@@ -12,7 +12,8 @@ interface AuditParams {
 }
 
 export const logAudit = (params: AuditParams) =>
-  prisma.auditLog.create({ data: params });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  prisma.auditLog.create({ data: params as any });
 
 // Fire-and-forget audit log — never throws, never blocks response
 export const audit = (params: AuditParams) => {

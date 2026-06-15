@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+﻿import React, { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { ChevronDown, ChevronRight, ShieldCheck } from 'lucide-react'
 import { auditApi } from '../../lib/api'
@@ -45,7 +45,7 @@ function getActionChipClass(action: string): string {
     case 'REJECT':
       return 'bg-red-50 text-red-700 ring-1 ring-inset ring-red-200'
     case 'LOGIN':
-      return 'bg-indigo-50 text-indigo-700 ring-1 ring-inset ring-indigo-200'
+      return 'bg-brand-50 text-brand-700 ring-1 ring-inset ring-brand-200'
     case 'LOGOUT':
       return 'bg-slate-100 text-slate-600 ring-1 ring-inset ring-slate-200'
     case 'UPDATE':
@@ -230,9 +230,9 @@ export default function AuditPage() {
   ]
 
   const selectClass =
-    'rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200'
+    'rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20'
   const inputClass =
-    'rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200'
+    'rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm placeholder:text-slate-400 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20'
 
   return (
     <div>
@@ -242,8 +242,8 @@ export default function AuditPage() {
       />
 
       {/* Immutability notice */}
-      <div className="mb-5 flex items-center gap-2.5 rounded-lg border border-indigo-200 bg-indigo-50 px-4 py-3 text-sm text-indigo-700">
-        <ShieldCheck size={16} className="shrink-0 text-indigo-500" />
+      <div className="mb-5 flex items-center gap-2.5 rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-700">
+        <ShieldCheck size={16} className="shrink-0 text-brand-600" />
         Audit logs are immutable and cannot be modified.
       </div>
 

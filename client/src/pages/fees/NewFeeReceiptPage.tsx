@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+﻿import React, { useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -150,10 +150,10 @@ export default function NewFeeReceiptPage() {
   }
 
   const inputClass =
-    'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 disabled:bg-slate-50 disabled:text-slate-400'
+    'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20 disabled:bg-slate-50 disabled:text-slate-400'
 
   const selectClass =
-    'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/20'
+    'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20'
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
@@ -355,14 +355,14 @@ export default function NewFeeReceiptPage() {
           {watchedCurrencyId && amountNum > 0 && (
             <div
               className={[
-                'flex items-center gap-2 rounded-lg border border-indigo-100 bg-indigo-50 px-4 py-3',
+                'flex items-center gap-2 rounded-lg border border-brand-200 bg-brand-50 px-4 py-3',
                 isBaseCurrencySelected ? 'sm:col-span-2' : '',
               ].join(' ')}
             >
-              <span className="text-sm text-indigo-600">
+              <span className="text-sm text-brand-600">
                 Amount in {baseCurrency?.code ?? 'base currency'}:
               </span>
-              <span className="font-semibold text-indigo-900">
+              <span className="font-semibold text-brand-600">
                 {baseCurrency?.symbol ?? ''}{' '}
                 {amountBase.toLocaleString('en-US', {
                   minimumFractionDigits: 2,
@@ -441,7 +441,7 @@ export default function NewFeeReceiptPage() {
           <button
             type="submit"
             disabled={isSubmitting || createMutation.isPending}
-            className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
+            className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {createMutation.isPending ? 'Submitting...' : 'Submit Receipt'}
           </button>

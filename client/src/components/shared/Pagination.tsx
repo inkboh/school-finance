@@ -7,39 +7,33 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-export default function Pagination({
-  page,
-  totalPages,
-  onPageChange,
-}: PaginationProps) {
+export default function Pagination({ page, totalPages, onPageChange }: PaginationProps) {
   if (totalPages <= 1) return null;
 
   const canPrev = page > 1;
   const canNext = page < totalPages;
 
-  const btnBase =
-    'flex items-center gap-1 rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors';
-  const btnEnabled =
-    'border-slate-300 bg-white text-slate-700 hover:border-indigo-400 hover:bg-indigo-50 hover:text-indigo-700';
-  const btnDisabled =
-    'cursor-not-allowed border-slate-200 bg-slate-50 text-slate-300';
-
   return (
-    <div className="flex items-center justify-between gap-4 pt-4">
+    <div className="flex items-center justify-between gap-4 pt-4 border-t border-slate-100">
       <button
         type="button"
         onClick={() => canPrev && onPageChange(page - 1)}
         disabled={!canPrev}
         aria-label="Previous page"
-        className={[btnBase, canPrev ? btnEnabled : btnDisabled].join(' ')}
+        className={[
+          'flex items-center gap-1.5 rounded-xl border px-4 py-2 text-sm font-semibold transition-all',
+          canPrev
+            ? 'border-slate-200 bg-white text-slate-700 hover:border-brand-400 hover:bg-brand-50 hover:text-brand-700 shadow-sm'
+            : 'cursor-not-allowed border-slate-100 bg-slate-50 text-slate-300',
+        ].join(' ')}
       >
         <ChevronLeft size={15} />
         Previous
       </button>
 
-      <span className="text-sm text-slate-500">
-        Page <span className="font-semibold text-slate-700">{page}</span> of{' '}
-        <span className="font-semibold text-slate-700">{totalPages}</span>
+      <span className="text-sm text-slate-400">
+        Page <span className="font-bold text-slate-700">{page}</span> of{' '}
+        <span className="font-bold text-slate-700">{totalPages}</span>
       </span>
 
       <button
@@ -47,7 +41,12 @@ export default function Pagination({
         onClick={() => canNext && onPageChange(page + 1)}
         disabled={!canNext}
         aria-label="Next page"
-        className={[btnBase, canNext ? btnEnabled : btnDisabled].join(' ')}
+        className={[
+          'flex items-center gap-1.5 rounded-xl border px-4 py-2 text-sm font-semibold transition-all',
+          canNext
+            ? 'border-slate-200 bg-white text-slate-700 hover:border-brand-400 hover:bg-brand-50 hover:text-brand-700 shadow-sm'
+            : 'cursor-not-allowed border-slate-100 bg-slate-50 text-slate-300',
+        ].join(' ')}
       >
         Next
         <ChevronRight size={15} />

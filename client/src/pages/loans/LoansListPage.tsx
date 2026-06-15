@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+﻿import React, { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -73,7 +73,7 @@ function Tab({ active, onClick, icon, label, sublabel }: TabProps) {
       className={[
         'flex items-center gap-2 border-b-2 px-4 py-3 text-sm font-medium transition-colors',
         active
-          ? 'border-indigo-600 text-indigo-600'
+          ? 'border-brand-200 text-brand-600'
           : 'border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700',
       ].join(' ')}
     >
@@ -83,7 +83,7 @@ function Tab({ active, onClick, icon, label, sublabel }: TabProps) {
         className={[
           'hidden rounded-full px-2 py-0.5 text-xs font-semibold sm:inline',
           active
-            ? 'bg-indigo-100 text-indigo-700'
+            ? 'bg-brand-100 text-brand-700'
             : 'bg-slate-100 text-slate-500',
         ].join(' ')}
       >
@@ -237,7 +237,7 @@ export default function LoansListPage() {
         <button
           type="button"
           onClick={() => navigate(`/loans/${v}`)}
-          className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-600 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700 transition-colors"
+          className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-600 hover:border-brand-400 hover:bg-brand-50 hover:text-brand-700 transition-colors"
           aria-label="View loan"
         >
           <Eye size={13} />
@@ -258,7 +258,7 @@ export default function LoansListPage() {
             <button
               type="button"
               onClick={() => navigate('/loans/new')}
-              className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
             >
               <Plus size={16} />
               New Loan
@@ -325,7 +325,7 @@ export default function LoansListPage() {
               id="status-filter"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as LoanStatus | '')}
-              className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-700 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+              className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs text-slate-700 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20"
             >
               {LOAN_STATUSES.map((s) => (
                 <option key={s.value} value={s.value}>

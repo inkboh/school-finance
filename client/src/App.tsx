@@ -19,6 +19,17 @@ import LoanDetailPage from './pages/loans/LoanDetailPage'
 import AuditPage from './pages/audit/AuditPage'
 import SettingsPage from './pages/settings/SettingsPage'
 import UsersPage from './pages/users/UsersPage'
+import StudentsListPage from './pages/students/StudentsListPage'
+import NewStudentPage from './pages/students/NewStudentPage'
+import StudentDetailPage from './pages/students/StudentDetailPage'
+import ObligationsListPage from './pages/obligations/ObligationsListPage'
+import NewObligationPage from './pages/obligations/NewObligationPage'
+import ProjectsListPage from './pages/projects/ProjectsListPage'
+import NewProjectPage from './pages/projects/NewProjectPage'
+import ProjectDetailPage from './pages/projects/ProjectDetailPage'
+import DocumentsListPage from './pages/documents/DocumentsListPage'
+import NewDocumentPage from './pages/documents/NewDocumentPage'
+import DocumentDetailPage from './pages/documents/DocumentDetailPage'
 
 function NotFound() {
   return (
@@ -88,6 +99,25 @@ export default function App() {
               }
             />
             <Route path="/loans/:id" element={<LoanDetailPage />} />
+
+            {/* Students */}
+            <Route path="/students" element={<StudentsListPage />} />
+            <Route path="/students/new" element={<NewStudentPage />} />
+            <Route path="/students/:id" element={<StudentDetailPage />} />
+
+            {/* Obligations */}
+            <Route path="/obligations" element={<ObligationsListPage />} />
+            <Route path="/obligations/new" element={<NewObligationPage />} />
+
+            {/* Projects */}
+            <Route path="/projects" element={<ProjectsListPage />} />
+            <Route path="/projects/new" element={<NewProjectPage />} />
+            <Route path="/projects/:id" element={<ProjectDetailPage />} />
+
+            {/* Documents */}
+            <Route path="/documents" element={<DocumentsListPage />} />
+            <Route path="/documents/new" element={<NewDocumentPage />} />
+            <Route path="/documents/:id" element={<DocumentDetailPage />} />
 
             {/* Audit — not for CASHIER */}
             <Route

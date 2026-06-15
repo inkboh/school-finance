@@ -14,6 +14,14 @@ import type {
   ExpenseCategory,
   User,
   AuditLog,
+  Student,
+  StudentStats,
+  RecurringObligation,
+  ObligationPayment,
+  ObligationSummary,
+  Project,
+  ProjectFunding,
+  PolicyDocument,
 } from '../types'
 
 // ─── Axios instance ───────────────────────────────────────────────────────────
@@ -251,6 +259,101 @@ export const usersApi = {
 export const auditApi = {
   list: (params?: Record<string, unknown>): Promise<ApiResponse<AuditLog[]>> =>
     api.get('/audit', { params }).then((r) => r.data),
+}
+
+// ─── Students API ─────────────────────────────────────────────────────────────
+
+export const studentsApi = {
+  list: (params?: Record<string, unknown>): Promise<ApiResponse<Student[]>> =>
+    api.get('/students', { params }).then((r) => r.data),
+
+  get: (id: string): Promise<ApiResponse<Student>> =>
+    api.get(`/students/${id}`).then((r) => r.data),
+
+  create: (data: Record<string, unknown>): Promise<ApiResponse<Student>> =>
+    api.post('/students', data).then((r) => r.data),
+
+  update: (id: string, data: Record<string, unknown>): Promise<ApiResponse<Student>> =>
+    api.put(`/students/${id}`, data).then((r) => r.data),
+
+  stats: (): Promise<ApiResponse<StudentStats>> =>
+    api.get('/students/stats').then((r) => r.data),
+}
+
+// ─── Obligations API ──────────────────────────────────────────────────────────
+
+export const obligationsApi = {
+  list: (params?: Record<string, unknown>): Promise<ApiResponse<RecurringObligation[]>> =>
+    api.get('/obligations', { params }).then((r) => r.data),
+
+  get: (id: string): Promise<ApiResponse<RecurringObligation>> =>
+    api.get(`/obligations/${id}`).then((r) => r.data),
+
+  create: (data: Record<string, unknown>): Promise<ApiResponse<RecurringObligation>> =>
+    api.post('/obligations', data).then((r) => r.data),
+
+  update: (id: string, data: Record<string, unknown>): Promise<ApiResponse<RecurringObligation>> =>
+    api.put(`/obligations/${id}`, data).then((r) => r.data),
+
+  summary: (): Promise<ApiResponse<ObligationSummary>> =>
+    api.get('/obligations/summary').then((r) => r.data),
+
+  recordPayment: (id: string, data: Record<string, unknown>): Promise<ApiResponse<ObligationPayment>> =>
+    api.post(`/obligations/${id}/payments`, data).then((r) => r.data),
+
+  approvePayment: (id: string, paymentId: string): Promise<ApiResponse<ObligationPayment>> =>
+    api.post(`/obligations/${id}/payments/${paymentId}/approve`).then((r) => r.data),
+}
+
+// ─── Projects API ─────────────────────────────────────────────────────────────
+
+export const projectsApi = {
+  list: (params?: Record<string, unknown>): Promise<ApiResponse<Project[]>> =>
+    api.get('/projects', { params }).then((r) => r.data),
+
+  get: (id: string): Promise<ApiResponse<Project>> =>
+    api.get(`/projects/${id}`).then((r) => r.data),
+
+  create: (data: Record<string, unknown>): Promise<ApiResponse<Project>> =>
+    api.post('/projects', data).then((r) => r.data),
+
+  update: (id: string, data: Record<string, unknown>): Promise<ApiResponse<Project>> =>
+    api.put(`/projects/${id}`, data).then((r) => r.data),
+
+  addFunding: (id: string, data: Record<string, unknown>): Promise<ApiResponse<ProjectFunding>> =>
+    api.post(`/projects/${id}/funding`, data).then((r) => r.data),
+
+  updateFunding: (id: string, fundingId: string, data: Record<string, unknown>): Promise<ApiResponse<ProjectFunding>> =>
+    api.put(`/projects/${id}/funding/${fundingId}`, data).then((r) => r.data),
+
+  deleteFunding: (id: string, fundingId: string): Promise<ApiResponse<void>> =>
+    api.delete(`/projects/${id}/funding/${fundingId}`).then((r) => r.data),
+}
+
+// ─── Documents API ────────────────────────────────────────────────────────────
+
+export const documentsApi = {
+  list: (params?: Record<string, unknown>): Promise<ApiResponse<PolicyDocument[]>> =>
+    api.get('/documents', { params }).then((r) => r.data),
+
+  get: (id: string): Promise<ApiResponse<PolicyDocument>> =>
+    api.get(`/documents/${id}`).then((r) => r.data),
+
+  create: (data: FormData | Record<string, unknown>): Promise<ApiResponse<PolicyDocument>> => {
+    if (data instanceof FormData) {
+      return api.post('/documents', data, { headers: { 'Content-Type': 'multipart/form-data' } }).then((r) => r.data)
+    }
+    return api.post('/documents', data).then((r) => r.data)
+  },
+
+  update: (id: string, data: FormData | Record<string, unknown>): Promise<ApiResponse<PolicyDocument>> => {
+    if (data instanceof FormData) {
+      return api.put(`/documents/${id}`, data, { headers: { 'Content-Type': 'multipart/form-data' } }).then((r) => r.data)
+    }
+    return api.put(`/documents/${id}`, data).then((r) => r.data)
+  },
+
+  downloadUrl: (id: string): string => `/api/documents/${id}/download`,
 }
 
 // ─── Exports ──────────────────────────────────────────────────────────────────

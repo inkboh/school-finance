@@ -1,0 +1,37 @@
+# Build stage — runs on ARM64 Linux so Prisma generates the correct binary
+FROM public.ecr.aws/lambda/nodejs:20-arm64 AS builder
+
+WORKDIR /app
+
+# Install dependencies first (layer cache)
+COPY server/package*.json ./server/
+COPY prisma/schema.prisma ./prisma/schema.prisma
+
+WORKDIR /app/server
+RUN npm ci
+
+# Generate Prisma client for ARM64 Linux
+# server/package.json has "schema": "../prisma/schema.prisma"
+# Output resolves to /app/server/node_modules/.prisma/client
+RUN npx prisma generate
+
+# Compile TypeScript
+COPY server/src/ ./src/
+COPY server/tsconfig.json ./tsconfig.json
+RUN npx tsc --outDir dist
+
+# Runtime stage
+FROM public.ecr.aws/lambda/nodejs:20-arm64
+
+WORKDIR ${LAMBDA_TASK_ROOT}
+
+# Compiled JS
+COPY --from=builder /app/server/dist/ ./
+
+# node_modules including .prisma/client binary
+COPY --from=builder /app/server/node_modules/ ./node_modules/
+
+# Prisma schema required by prisma db push at runtime
+COPY prisma/schema.prisma ./prisma/schema.prisma
+
+CMD ["lambda.handler"]

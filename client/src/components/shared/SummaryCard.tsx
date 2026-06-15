@@ -2,9 +2,7 @@ import React from 'react';
 import { TrendingDown, TrendingUp } from 'lucide-react';
 
 interface Trend {
-  /** Numeric change value; positive = up, negative = down */
   value: number;
-  /** Human-readable label, e.g. "vs last month" */
   label: string;
 }
 
@@ -12,13 +10,11 @@ interface SummaryCardProps {
   title: string;
   value: string | number;
   subtitle?: string;
-  /** Icon element, e.g. <DollarSign size={20} /> */
   icon: React.ReactNode;
-  /**
-   * A Tailwind background colour class applied to the icon wrapper,
-   * e.g. "bg-indigo-500", "bg-emerald-500".
-   */
-  colorClass: string;
+  /** Tailwind gradient class e.g. "stat-card-income" or a full custom class */
+  gradientClass?: string;
+  /** Legacy: plain background color class. Takes precedence if gradientClass not set. */
+  colorClass?: string;
   trend?: Trend;
 }
 
@@ -27,64 +23,61 @@ export default function SummaryCard({
   value,
   subtitle,
   icon,
+  gradientClass,
   colorClass,
   trend,
 }: SummaryCardProps) {
   const trendPositive = trend && trend.value >= 0;
+  const bg = gradientClass ?? (colorClass ? undefined : 'stat-card-income');
 
   return (
-    <div className="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-      {/* Top row: text + icon */}
-      <div className="flex items-start justify-between gap-4">
-        <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-medium text-slate-500">{title}</p>
-          <p className="mt-1 text-2xl font-bold text-slate-900 leading-tight">
-            {value}
-          </p>
-          {subtitle && (
-            <p className="mt-0.5 truncate text-xs text-slate-400">{subtitle}</p>
-          )}
-        </div>
+    <div className="relative overflow-hidden rounded-2xl shadow-card-md transition-all duration-200 hover:shadow-card-hover hover:-translate-y-0.5 group">
+      {/* Gradient background */}
+      <div className={['absolute inset-0', bg ?? colorClass].join(' ')} />
 
-        <div
-          className={[
-            'flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white',
-            colorClass,
-          ].join(' ')}
-          aria-hidden="true"
-        >
-          {icon}
-        </div>
-      </div>
+      {/* Decorative circles */}
+      <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-white/10 transition-transform duration-300 group-hover:scale-110" />
+      <div className="absolute -bottom-8 -right-2 h-20 w-20 rounded-full bg-white/5" />
 
-      {/* Trend row */}
-      {trend && (
-        <div className="flex items-center gap-1.5 text-xs">
-          {trendPositive ? (
-            <TrendingUp
-              size={14}
-              className="shrink-0 text-emerald-500"
-              aria-hidden="true"
-            />
-          ) : (
-            <TrendingDown
-              size={14}
-              className="shrink-0 text-red-500"
-              aria-hidden="true"
-            />
-          )}
-          <span
-            className={[
-              'font-semibold',
-              trendPositive ? 'text-emerald-600' : 'text-red-600',
-            ].join(' ')}
+      {/* Content */}
+      <div className="relative p-5">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-semibold uppercase tracking-wider text-white/70">
+              {title}
+            </p>
+            <p className="mt-2 text-2xl font-bold text-white leading-none tracking-tight">
+              {value}
+            </p>
+            {subtitle && (
+              <p className="mt-1.5 text-xs text-white/60 leading-snug">
+                {subtitle}
+              </p>
+            )}
+          </div>
+
+          <div
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/20 text-white shadow-sm backdrop-blur-sm ring-1 ring-white/10"
+            aria-hidden="true"
           >
-            {trendPositive ? '+' : ''}
-            {trend.value}%
-          </span>
-          <span className="text-slate-400">{trend.label}</span>
+            {icon}
+          </div>
         </div>
-      )}
+
+        {trend && (
+          <div className="mt-4 flex items-center gap-1.5 text-xs border-t border-white/15 pt-3">
+            {trendPositive ? (
+              <TrendingUp size={13} className="shrink-0 text-white/80" />
+            ) : (
+              <TrendingDown size={13} className="shrink-0 text-white/80" />
+            )}
+            <span className="font-semibold text-white">
+              {trendPositive ? '+' : ''}{trend.value}%
+            </span>
+            <span className="text-white/60">{trend.label}</span>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

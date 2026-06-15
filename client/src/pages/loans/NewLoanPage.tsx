@@ -1,4 +1,4 @@
-import React from 'react'
+﻿import React from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -42,7 +42,7 @@ type FormValues = z.infer<typeof schema>
 // ─── Input class helper ───────────────────────────────────────────────────────
 
 const inputClass =
-  'w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-300 disabled:bg-slate-50 disabled:text-slate-400'
+  'w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20 disabled:bg-slate-50 disabled:text-slate-400'
 
 const errorInputClass =
   'w-full rounded-lg border border-red-300 bg-white px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-300'
@@ -129,9 +129,9 @@ export default function NewLoanPage() {
       <div className="mx-auto max-w-2xl">
         <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
           {/* Loan type explainer banner */}
-          <div className="flex items-start gap-3 rounded-t-xl border-b border-slate-100 bg-indigo-50 px-6 py-4">
-            <Info size={16} className="mt-0.5 shrink-0 text-indigo-500" />
-            <p className="text-sm text-indigo-700">
+          <div className="flex items-start gap-3 rounded-t-xl border-b border-slate-100 bg-brand-50 px-6 py-4">
+            <Info size={16} className="mt-0.5 shrink-0 text-brand-600" />
+            <p className="text-sm text-brand-700">
               <span className="font-semibold">BORROWED</span> — We owe this money to the party.&nbsp;&nbsp;
               <span className="font-semibold">LENT</span> — This party owes us money.
             </p>
@@ -174,7 +174,7 @@ export default function NewLoanPage() {
                     <label
                       key={opt.value}
                       htmlFor={id}
-                      className="relative flex cursor-pointer flex-col gap-1 rounded-xl border-2 border-slate-200 p-4 transition-colors has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-50"
+                      className="relative flex cursor-pointer flex-col gap-1 rounded-xl border-2 border-slate-200 p-4 transition-colors has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50"
                     >
                       <input
                         id={id}
@@ -375,7 +375,7 @@ export default function NewLoanPage() {
               <button
                 type="submit"
                 disabled={isSubmitting || mutation.isPending}
-                className="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-60"
+                className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2 text-sm font-medium text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 disabled:opacity-60"
               >
                 {mutation.isPending ? 'Saving…' : 'Create Loan'}
               </button>

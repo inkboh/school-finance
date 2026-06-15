@@ -64,6 +64,7 @@ export interface FeeReceipt {
   studentName: string
   studentId?: string
   grade?: string
+  categoryId?: string
   amount: number
   amountBase: number
   exchangeRate: number
@@ -220,4 +221,162 @@ export interface RecentActivity {
   status: TxStatus
   date: string
   createdByName: string
+}
+
+// ─── Students ─────────────────────────────────────────────────────────────────
+
+export type StudentStatus = 'ACTIVE' | 'INACTIVE' | 'GRADUATED' | 'WITHDRAWN' | 'SUSPENDED'
+
+export interface Student {
+  id: string
+  studentId: string
+  firstName: string
+  lastName: string
+  grade: string
+  section?: string
+  dateOfBirth?: string
+  enrollmentDate: string
+  status: StudentStatus
+  parentName?: string
+  parentPhone?: string
+  parentEmail?: string
+  parentAddress?: string
+  notes?: string
+  createdAt: string
+  updatedAt: string
+  feeReceipts?: FeeReceipt[]
+}
+
+export interface StudentStats {
+  total: number
+  active: number
+  graduated: number
+  withdrawn: number
+  byGrade: { grade: string; _count: { id: number } }[]
+}
+
+// ─── Recurring Obligations ────────────────────────────────────────────────────
+
+export type ObligationCategory =
+  | 'INSURANCE' | 'TAX' | 'PERMIT' | 'CONTRACT'
+  | 'UTILITY' | 'SUBSCRIPTION' | 'RENT' | 'OTHER'
+
+export type ObligationFrequency =
+  | 'WEEKLY' | 'MONTHLY' | 'QUARTERLY' | 'BIANNUALLY' | 'ANNUALLY' | 'ONCE'
+
+export interface RecurringObligation {
+  id: string
+  name: string
+  description?: string
+  category: ObligationCategory
+  amount: number
+  currencyId: string
+  frequency: ObligationFrequency
+  nextDueDate: string
+  lastPaidDate?: string
+  vendorName?: string
+  vendorContact?: string
+  isActive: boolean
+  notes?: string
+  createdAt: string
+  updatedAt: string
+  currency?: { code: string; symbol: string }
+  payments?: ObligationPayment[]
+}
+
+export interface ObligationPayment {
+  id: string
+  obligationId: string
+  amount: number
+  currencyId: string
+  exchangeRate: number
+  amountBase: number
+  paidDate: string
+  paymentMethod: PaymentMethod
+  reference?: string
+  notes?: string
+  status: TxStatus
+  createdById: string
+  approvedById?: string
+  approvedAt?: string
+  rejectedReason?: string
+  createdAt: string
+  currency?: { code: string; symbol: string }
+  createdBy?: { name: string }
+  approvedBy?: { name: string }
+}
+
+export interface ObligationSummary {
+  total: number
+  overdue: number
+  dueSoon: number
+  upcoming: RecurringObligation[]
+}
+
+// ─── Projects ─────────────────────────────────────────────────────────────────
+
+export type ProjectStatus = 'PLANNING' | 'ACTIVE' | 'ON_HOLD' | 'COMPLETED' | 'CANCELLED'
+export type FundingType = 'INTERNAL' | 'PTA' | 'GRANT' | 'DONATION' | 'LOAN' | 'OTHER'
+export type FundingStatus = 'PLEDGED' | 'RECEIVED' | 'CANCELLED'
+
+export interface Project {
+  id: string
+  projectNumber: string
+  name: string
+  description?: string
+  scope?: string
+  status: ProjectStatus
+  startDate?: string
+  endDate?: string
+  budget: number
+  currencyId: string
+  notes?: string
+  createdById: string
+  createdAt: string
+  updatedAt: string
+  currency?: { code: string; symbol: string }
+  createdBy?: { name: string }
+  funding?: ProjectFunding[]
+}
+
+export interface ProjectFunding {
+  id: string
+  projectId: string
+  source: string
+  type: FundingType
+  amount: number
+  currencyId: string
+  date: string
+  status: FundingStatus
+  notes?: string
+  createdAt: string
+  currency?: { code: string; symbol: string }
+}
+
+// ─── Policy Documents ─────────────────────────────────────────────────────────
+
+export type DocumentCategory =
+  | 'POLICY' | 'GUIDELINE' | 'PROCEDURE' | 'REGULATION'
+  | 'CONTRACT' | 'REPORT' | 'OTHER'
+
+export interface PolicyDocument {
+  id: string
+  docNumber: string
+  title: string
+  category: DocumentCategory
+  description?: string
+  content?: string
+  fileUrl?: string
+  fileName?: string
+  fileSize?: number
+  version: string
+  issuedDate: string
+  effectiveDate: string
+  expiryDate?: string
+  isActive: boolean
+  createdById: string
+  notes?: string
+  createdAt: string
+  updatedAt: string
+  createdBy?: { name: string }
 }

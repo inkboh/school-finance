@@ -29,3 +29,17 @@ Thumbs.db
 
 # Docker volumes (local data)
 postgres_data/
+
+# CDK synthesis output and assets
+cdk.out/
+infra/cdk.out/
+
+# Deployment script outputs
+cdk-outputs.json
+dbpush-response.json
+
+# Server compiled output
+server/dist/
+
+# Lambda build response
+*.response.json

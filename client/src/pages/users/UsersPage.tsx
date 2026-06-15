@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+﻿import React, { useEffect, useRef, useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Plus, X, UserCog, Power, PowerOff } from 'lucide-react'
 import { usersApi } from '../../lib/api'
@@ -30,7 +30,7 @@ function getRoleBadgeClass(role: Role): string {
     case 'SUPER_ADMIN':
       return 'bg-purple-50 text-purple-700 ring-1 ring-inset ring-purple-200'
     case 'FINANCE_MANAGER':
-      return 'bg-indigo-50 text-indigo-700 ring-1 ring-inset ring-indigo-200'
+      return 'bg-brand-50 text-brand-700 ring-1 ring-inset ring-brand-200'
     case 'PRINCIPAL':
       return 'bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-200'
     case 'CASHIER':
@@ -167,9 +167,9 @@ function AddUserModal({ onClose }: { onClose: () => void }) {
   }
 
   const inputClass =
-    'w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 shadow-sm placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200'
+    'w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 shadow-sm placeholder:text-slate-400 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20'
   const selectClass =
-    'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200'
+    'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20'
 
   return (
     <Modal title="Add User" onClose={onClose}>
@@ -249,7 +249,7 @@ function AddUserModal({ onClose }: { onClose: () => void }) {
           <button
             type="submit"
             disabled={createMutation.isPending}
-            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+            className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
           >
             {createMutation.isPending ? 'Creating…' : 'Create User'}
           </button>
@@ -305,9 +305,9 @@ function EditUserModal({
   }
 
   const inputClass =
-    'w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 shadow-sm placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200'
+    'w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 shadow-sm placeholder:text-slate-400 focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20'
   const selectClass =
-    'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-200'
+    'w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-400/20'
 
   return (
     <Modal title={`Edit — ${user.name}`} onClose={onClose}>
@@ -366,7 +366,7 @@ function EditUserModal({
           <button
             type="submit"
             disabled={updateMutation.isPending}
-            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-60"
+            className="rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-60"
           >
             {updateMutation.isPending ? 'Saving…' : 'Save Changes'}
           </button>
@@ -507,7 +507,7 @@ export default function UsersPage() {
           <button
             type="button"
             onClick={() => setShowAdd(true)}
-            className="flex items-center gap-1.5 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700"
+            className="flex items-center gap-1.5 rounded-lg bg-brand-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-brand-700"
           >
             <Plus size={15} />
             Add User
