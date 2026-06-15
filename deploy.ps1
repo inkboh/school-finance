@@ -28,7 +28,7 @@ $account = (aws sts get-caller-identity --query Account --output text 2>$null)
 if (-not $account) { Fail "AWS credentials not configured. Run: aws configure" }
 Write-Ok "AWS account: $account"
 
-$dockerOk = (docker info 2>$null)
+docker info 2>$null | Out-Null
 if ($LASTEXITCODE -ne 0) { Fail "Docker daemon is not running. Start Docker Desktop." }
 Write-Ok "Docker is running"
 
@@ -82,23 +82,29 @@ Write-Host ""
 # ── 8. Push Prisma schema to RDS ─────────────────────────────────────────────
 Write-Step "Pushing Prisma schema to RDS via Lambda"
 Write-Host "  Invoking SchoolFinanceApi Lambda with dbpush action..."
-$payload = '{"action":"dbpush"}'
-$payloadB64 = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($payload))
 
+# Write payload to temp file — avoids PowerShell double-quote mangling on --payload
+$payloadPath = "$env:TEMP\sf-dbpush-payload.json"
+[System.IO.File]::WriteAllText($payloadPath, '{"action":"dbpush"}', [System.Text.Encoding]::UTF8)
+
+$responseFile = "$Root\dbpush-response.json"
 aws lambda invoke `
   --function-name SchoolFinanceApi `
-  --cli-binary-format raw-in-base64-out `
-  --payload $payload `
-  "$Root\dbpush-response.json"
+  --payload "file://$payloadPath" `
+  $responseFile
 
-$response = Get-Content "$Root\dbpush-response.json" | ConvertFrom-Json
-if ($response.success) {
-  Write-Ok "Database schema pushed successfully"
+if ($LASTEXITCODE -ne 0 -or -not (Test-Path $responseFile)) {
+  Write-Host "  WARNING: Lambda invocation failed. Retry manually:" -ForegroundColor Yellow
+  Write-Host "    [System.IO.File]::WriteAllText(`"`$env:TEMP\p.json`", '{`"action`":`"dbpush`"}')"
+  Write-Host "    aws lambda invoke --function-name SchoolFinanceApi --payload `"file://`$env:TEMP/p.json`" out.json"
 } else {
-  Write-Host "  WARNING: DB push may have failed. Check dbpush-response.json" -ForegroundColor Yellow
-  Write-Host "  Error: $($response.error)" -ForegroundColor Yellow
-  Write-Host "  You can retry manually:"
-  Write-Host "    aws lambda invoke --function-name SchoolFinanceApi --payload '{`"action`":`"dbpush`"}' out.json"
+  $response = Get-Content $responseFile -Raw | ConvertFrom-Json
+  if ($response.success) {
+    Write-Ok "Database schema pushed successfully"
+  } else {
+    Write-Host "  WARNING: DB push reported failure:" -ForegroundColor Yellow
+    Write-Host "  $($response.error)" -ForegroundColor Yellow
+  }
 }
 
 Write-Host ""

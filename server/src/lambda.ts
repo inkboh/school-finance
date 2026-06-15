@@ -40,12 +40,17 @@ async function initialize(): Promise<void> {
 
 export async function handler(event: unknown, context: unknown): Promise<unknown> {
   await initialize()
+  // Direct admin invocations (not from API Gateway) have an `action` field
+  const ev = event as Record<string, unknown> | null
+  if (ev && typeof ev === 'object' && ev['action'] === 'dbpush') {
+    return dbPushHandler(ev as { action: string })
+  }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return httpHandler(event as any, context as any)
 }
 
-// Invoked manually via AWS CLI to push the Prisma schema to RDS on first deploy
-// Usage: aws lambda invoke --function-name <name> --payload '{"action":"dbpush"}' out.json
+// Push the Prisma schema to RDS — invoked either directly (via dbPushHandler export)
+// or from the main handler when event.action === 'dbpush'
 export async function dbPushHandler(event: { action?: string }): Promise<{ success: boolean; output?: string; error?: string }> {
   if (event.action !== 'dbpush') return { success: false, error: 'Unknown action' }
   await initialize()
