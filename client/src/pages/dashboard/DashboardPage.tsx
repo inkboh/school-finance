@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import {
   BarChart,
@@ -23,6 +23,7 @@ import { format } from 'date-fns'
 
 import { dashboardApi } from '../../lib/api'
 import { formatCurrency, formatDate } from '../../lib/utils'
+import { useAuthStore } from '../../store/auth.store'
 import SummaryCard from '../../components/shared/SummaryCard'
 import DataTable, { type Column } from '../../components/shared/DataTable'
 import StatusBadge from '../../components/shared/StatusBadge'
@@ -157,8 +158,24 @@ const ACTIVITY_COLUMNS: Column<RecentActivity>[] = [
   },
 ]
 
+function useGreeting() {
+  const { user } = useAuthStore()
+  return useMemo(() => {
+    const hour = new Date().getHours()
+    const firstName = user?.name?.split(' ')[0] ?? ''
+    let salutation: string
+    let emoji: string
+    if (hour < 12)       { salutation = 'Good morning';   emoji = '☀️' }
+    else if (hour < 17)  { salutation = 'Good afternoon'; emoji = '🌤️' }
+    else if (hour < 21)  { salutation = 'Good evening';   emoji = '🌆' }
+    else                 { salutation = 'Good night';      emoji = '🌙' }
+    return { salutation, firstName, emoji }
+  }, [user?.name])
+}
+
 export default function DashboardPage() {
   const today = format(new Date(), 'EEEE, d MMMM yyyy')
+  const { salutation, firstName, emoji } = useGreeting()
 
   const summaryQuery = useQuery({
     queryKey: ['dashboard', 'summary'],
@@ -215,7 +232,7 @@ export default function DashboardPage() {
               Riverdale Academy Finance
             </p>
             <h1 className="text-2xl font-extrabold text-white tracking-tight">
-              Good morning, {summary ? '👋' : '—'}
+              {salutation}{firstName ? `, ${firstName}` : ''} {emoji}
             </h1>
             <p className="text-sm text-white/60 mt-1">{today}</p>
           </div>

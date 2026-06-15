@@ -165,6 +165,10 @@ export const createExchangeRate = async (req: AuthRequest, res: Response): Promi
       res.status(404).json({ success: false, error: 'Currency not found' })
       return
     }
+    if (currency.isBaseCurrency) {
+      res.status(400).json({ success: false, error: 'Cannot set an exchange rate for the base currency' })
+      return
+    }
 
     const exchangeRate = await prisma.exchangeRate.create({
       data: {

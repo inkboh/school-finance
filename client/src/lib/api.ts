@@ -23,6 +23,8 @@ import type {
   Project,
   ProjectFunding,
   PolicyDocument,
+  DirectorVote,
+  VoteType,
 } from '../types'
 
 // ─── Axios instance ───────────────────────────────────────────────────────────
@@ -376,6 +378,19 @@ export const documentsApi = {
   },
 
   downloadUrl: (id: string): string => `/api/documents/${id}/download`,
+}
+
+// ─── Votes API ───────────────────────────────────────────────────────────────
+
+export const votesApi = {
+  getVotes: (entityType: string, entityId: string): Promise<ApiResponse<DirectorVote[]>> =>
+    api.get('/votes', { params: { entityType, entityId } }).then((r) => r.data),
+
+  castVote: (entityType: string, entityId: string, vote: VoteType, comment?: string): Promise<ApiResponse<DirectorVote>> =>
+    api.post('/votes', { entityType, entityId, vote, comment }).then((r) => r.data),
+
+  deleteVote: (entityType: string, entityId: string): Promise<ApiResponse<null>> =>
+    api.delete('/votes', { params: { entityType, entityId } }).then((r) => r.data),
 }
 
 // ─── Exports ──────────────────────────────────────────────────────────────────

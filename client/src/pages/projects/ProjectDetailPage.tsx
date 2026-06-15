@@ -5,8 +5,10 @@ import { ArrowLeft, Plus, Trash2, FolderKanban } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { projectsApi, settingsApi } from '../../lib/api'
 import { DataTable } from '../../components/shared'
+import VotePanel from '../../components/shared/VotePanel'
 import type { Column } from '../../components/shared'
 import { formatDate } from '../../lib/utils'
+import { useAuthStore } from '../../store/auth.store'
 import type { Project, ProjectFunding, ProjectStatus, FundingStatus } from '../../types'
 
 const STATUS_COLORS: Record<ProjectStatus, string> = {
@@ -182,6 +184,8 @@ export default function ProjectDetailPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const qc = useQueryClient()
+  const { user } = useAuthStore()
+  const isDirector = user?.role === 'DIRECTOR'
   const [showAddFunding, setShowAddFunding] = useState(false)
   const [editStatus, setEditStatus] = useState(false)
 
@@ -223,12 +227,16 @@ export default function ProjectDetailPage() {
     )},
     { accessor: 'date', header: 'Date', render: (_v, f) => <span className="text-sm text-slate-500">{formatDate(f.date)}</span> },
     { accessor: 'notes', header: 'Notes', render: (_v, f) => <span className="text-xs text-slate-400 truncate max-w-[120px]">{f.notes ?? '—'}</span> },
-    { accessor: 'id', header: '', render: (_v, f) => (
-      <button onClick={() => { if (confirm('Remove this funding entry?')) deleteFundingMutation.mutate(f.id) }}
-        className="btn-icon text-red-500 hover:bg-red-50" title="Remove">
-        <Trash2 size={14} />
-      </button>
-    )},
+    ...(!isDirector ? [{
+      accessor: 'id' as keyof ProjectFunding,
+      header: '',
+      render: (_v: unknown, f: ProjectFunding) => (
+        <button onClick={() => { if (confirm('Remove this funding entry?')) deleteFundingMutation.mutate(f.id) }}
+          className="btn-icon text-red-500 hover:bg-red-50" title="Remove">
+          <Trash2 size={14} />
+        </button>
+      ),
+    }] : []),
   ]
 
   if (isLoading) return <div className="flex items-center justify-center h-64 text-slate-400">Loading…</div>
@@ -244,7 +252,7 @@ export default function ProjectDetailPage() {
             <div>
               <div className="flex items-center gap-2 flex-wrap">
                 <h1 className="page-title">{project.name}</h1>
-                {editStatus ? (
+                {!isDirector && editStatus ? (
                   <select className="select text-xs h-7 py-0.5" defaultValue={project.status}
                     onChange={(e) => updateStatusMutation.mutate(e.target.value)}
                     onBlur={() => setEditStatus(false)}>
@@ -255,8 +263,9 @@ export default function ProjectDetailPage() {
                     <option value="CANCELLED">Cancelled</option>
                   </select>
                 ) : (
-                  <button onClick={() => setEditStatus(true)}
-                    className={`text-xs font-medium px-2.5 py-0.5 rounded-full cursor-pointer ${STATUS_COLORS[project.status]}`}>
+                  <button
+                    onClick={() => { if (!isDirector) setEditStatus(true) }}
+                    className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${isDirector ? 'cursor-default' : 'cursor-pointer'} ${STATUS_COLORS[project.status]}`}>
                     {project.status.replace('_', ' ')}
                   </button>
                 )}
@@ -296,13 +305,18 @@ export default function ProjectDetailPage() {
         {/* Funding Tracker */}
         <FundingTracker project={project} />
 
+        {/* Director Votes */}
+        <VotePanel entityType="Project" entityId={project.id} />
+
         {/* Funding Sources */}
         <div>
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-sm font-semibold text-slate-700">Funding Sources</h2>
-            <button onClick={() => setShowAddFunding(true)} className="btn-secondary flex items-center gap-1.5 text-xs">
-              <Plus size={13} /> Add Funding
-            </button>
+            {!isDirector && (
+              <button onClick={() => setShowAddFunding(true)} className="btn-secondary flex items-center gap-1.5 text-xs">
+                <Plus size={13} /> Add Funding
+              </button>
+            )}
           </div>
           <div className="card overflow-hidden">
             <DataTable

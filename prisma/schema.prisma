@@ -12,11 +12,18 @@ datasource db {
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
 enum Role {
-  SUPER_ADMIN    // user management only; read-only financials
-  CASHIER        // enter fee receipts; cannot approve anything
+  SUPER_ADMIN     // user management only; read-only financials
+  CASHIER         // enter fee receipts; cannot approve anything
   FINANCE_MANAGER // approve receipts/payments; enter & approve expenses
-  PRINCIPAL      // approve large expenses; full read-only view
-  AUDITOR        // full read-only + audit trail
+  PRINCIPAL       // approve large expenses; full read-only view
+  AUDITOR         // full read-only + audit trail
+  DIRECTOR        // co-proprietors; read-only financials + vote on projects/obligations/documents
+}
+
+enum VoteType {
+  FOR
+  AGAINST
+  ABSTAIN
 }
 
 enum TxStatus {
@@ -71,6 +78,7 @@ model User {
   approvedObligPayments ObligationPayment[] @relation("ObligPaymentApprovedBy")
   createdProjects      Project[]       @relation("ProjectCreatedBy")
   createdDocuments     PolicyDocument[] @relation("DocumentCreatedBy")
+  directorVotes        DirectorVote[]  @relation("DirectorVotes")
 }
 
 model RefreshToken {
@@ -458,6 +466,22 @@ model PolicyDocument {
   updatedAt     DateTime         @updatedAt
 
   createdBy User @relation("DocumentCreatedBy", fields: [createdById], references: [id])
+}
+
+// ─── Director Votes ───────────────────────────────────────────────────────────
+
+model DirectorVote {
+  id         String   @id @default(cuid())
+  entityType String   // "Project" | "Obligation" | "Document"
+  entityId   String
+  vote       VoteType
+  comment    String?
+  voterId    String
+  voter      User     @relation("DirectorVotes", fields: [voterId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([voterId, entityType, entityId])
 }
 
 // ─── Audit Trail (immutable) ──────────────────────────────────────────────────

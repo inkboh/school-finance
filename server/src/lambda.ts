@@ -142,6 +142,7 @@ export async function seedHandler(): Promise<{ success: boolean; seeded?: string
       { email: 'cashier@school.edu',   name: 'Front Desk Cashier',   password: 'Cashier@1234',   role: 'CASHIER'         as const },
       { email: 'principal@school.edu', name: 'School Principal',     password: 'Principal@1234', role: 'PRINCIPAL'       as const },
       { email: 'auditor@school.edu',   name: 'Internal Auditor',     password: 'Auditor@1234',   role: 'AUDITOR'         as const },
+      { email: 'director@school.edu',  name: 'Co-Proprietor',        password: 'Director@1234',  role: 'DIRECTOR'        as const },
     ]) {
       const passwordHash = await bcrypt.hash(u.password, 12)
       await db.user.upsert({

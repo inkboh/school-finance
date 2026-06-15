@@ -123,11 +123,11 @@ export default function App() {
             <Route path="/documents/new" element={<NewDocumentPage />} />
             <Route path="/documents/:id" element={<DocumentDetailPage />} />
 
-            {/* Audit — not for CASHIER */}
+            {/* Audit — not for CASHIER or DIRECTOR */}
             <Route
               path="/audit"
               element={
-                <ProtectedRoute allowedRoles={['AUDITOR', 'SUPER_ADMIN', 'PRINCIPAL', 'FINANCE_MANAGER']}>
+                <ProtectedRoute allowedRoles={['AUDITOR', 'SUPER_ADMIN', 'PRINCIPAL', 'FINANCE_MANAGER', 'DIRECTOR']}>
                   <AuditPage />
                 </ProtectedRoute>
               }

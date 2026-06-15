@@ -10,3 +10,4 @@ export { default as Pagination } from './Pagination';
 export { default as ConfirmModal } from './ConfirmModal';
 export { default as SummaryCard } from './SummaryCard';
 export { default as FormField } from './FormField';
+export { default as VotePanel } from './VotePanel';

@@ -101,6 +101,8 @@ export function getRoleLabel(role: Role): string {
       return 'Principal'
     case 'AUDITOR':
       return 'Auditor'
+    case 'DIRECTOR':
+      return 'Director'
     default:
       return role
   }

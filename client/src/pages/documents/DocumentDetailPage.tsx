@@ -5,7 +5,9 @@ import { ArrowLeft, Download, Edit2, Save, X, FileText, File } from 'lucide-reac
 import { useForm } from 'react-hook-form'
 import { documentsApi } from '../../lib/api'
 import { FormField } from '../../components/shared'
+import VotePanel from '../../components/shared/VotePanel'
 import { formatDate } from '../../lib/utils'
+import { useAuthStore } from '../../store/auth.store'
 import type { DocumentCategory, PolicyDocument } from '../../types'
 
 const CATEGORY_COLORS: Record<DocumentCategory, string> = {
@@ -28,6 +30,8 @@ export default function DocumentDetailPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const qc = useQueryClient()
+  const { user } = useAuthStore()
+  const isDirector = user?.role === 'DIRECTOR'
   const [editing, setEditing] = useState(false)
 
   const { data, isLoading } = useQuery({
@@ -99,7 +103,7 @@ export default function DocumentDetailPage() {
               <Download size={14} /> Download
             </a>
           )}
-          {!editing && (
+          {!editing && !isDirector && (
             <button onClick={startEdit} className="btn-secondary flex items-center gap-2 text-sm">
               <Edit2 size={14} /> Edit
             </button>
@@ -199,6 +203,9 @@ export default function DocumentDetailPage() {
           <pre className="whitespace-pre-wrap text-sm text-slate-700 font-sans leading-relaxed">{doc.content}</pre>
         </div>
       )}
+
+      {/* Director Votes */}
+      <VotePanel entityType="Document" entityId={doc.id} />
     </div>
   )
 }

@@ -21,6 +21,7 @@ const ROLES: Role[] = [
   'FINANCE_MANAGER',
   'PRINCIPAL',
   'AUDITOR',
+  'DIRECTOR',
 ]
 
 // ─── Role badge ───────────────────────────────────────────────────────────────
@@ -37,6 +38,8 @@ function getRoleBadgeClass(role: Role): string {
       return 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200'
     case 'AUDITOR':
       return 'bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-200'
+    case 'DIRECTOR':
+      return 'bg-violet-50 text-violet-700 ring-1 ring-inset ring-violet-200'
     default:
       return 'bg-slate-100 text-slate-600 ring-1 ring-inset ring-slate-200'
   }

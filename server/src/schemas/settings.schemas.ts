@@ -10,7 +10,7 @@ export const CreateCurrencySchema = z.object({
 export const CreateExchangeRateSchema = z.object({
   currencyId: z.string().cuid(),
   rate: z.number().positive(),
-  effectiveDate: z.string().datetime(),
+  effectiveDate: z.string().min(1),
 })
 
 export const CreateFeeCategorySchema = z.object({

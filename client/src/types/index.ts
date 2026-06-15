@@ -6,6 +6,21 @@ export type Role =
   | 'FINANCE_MANAGER'
   | 'PRINCIPAL'
   | 'AUDITOR'
+  | 'DIRECTOR'
+
+export type VoteType = 'FOR' | 'AGAINST' | 'ABSTAIN'
+
+export interface DirectorVote {
+  id: string
+  entityType: string
+  entityId: string
+  vote: VoteType
+  comment?: string
+  voterId: string
+  createdAt: string
+  updatedAt: string
+  voter: { id: string; name: string; role: string }
+}
 
 export type TxStatus = 'PENDING_APPROVAL' | 'APPROVED' | 'REJECTED'
 

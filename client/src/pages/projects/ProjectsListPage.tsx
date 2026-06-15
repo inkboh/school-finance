@@ -6,6 +6,7 @@ import { projectsApi } from '../../lib/api'
 import { PageHeader, DataTable, Pagination } from '../../components/shared'
 import type { Column } from '../../components/shared'
 import { formatDate } from '../../lib/utils'
+import { useAuthStore } from '../../store/auth.store'
 import type { Project, ProjectFunding, ProjectStatus } from '../../types'
 
 const STATUS_COLORS: Record<ProjectStatus, string> = {
@@ -45,6 +46,8 @@ function FundingBar({ project }: { project: Project }) {
 
 export default function ProjectsListPage() {
   const navigate = useNavigate()
+  const { user } = useAuthStore()
+  const isDirector = user?.role === 'DIRECTOR'
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
   const [status, setStatus] = useState<ProjectStatus | ''>('')
@@ -89,9 +92,11 @@ export default function ProjectsListPage() {
         title="Projects"
         subtitle="Capital projects, renovations, and major school initiatives"
         action={
-          <button onClick={() => navigate('/projects/new')} className="btn-primary flex items-center gap-2">
-            <Plus size={16} /> New Project
-          </button>
+          !isDirector ? (
+            <button onClick={() => navigate('/projects/new')} className="btn-primary flex items-center gap-2">
+              <Plus size={16} /> New Project
+            </button>
+          ) : undefined
         }
       />
 

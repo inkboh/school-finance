@@ -6,7 +6,7 @@ import { listAuditLogs } from '../controllers/audit.controller'
 const router = Router()
 
 // All audit routes require authentication and one of the permitted roles
-router.use(authenticate, requireRole('AUDITOR', 'SUPER_ADMIN', 'PRINCIPAL', 'FINANCE_MANAGER'))
+router.use(authenticate, requireRole('AUDITOR', 'SUPER_ADMIN', 'PRINCIPAL', 'FINANCE_MANAGER', 'DIRECTOR'))
 
 // GET /api/audit
 router.get('/', listAuditLogs)

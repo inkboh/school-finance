@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Plus, ShieldAlert, CheckCircle, CreditCard, AlertTriangle, Clock } from 'lucide-react'
+import { Plus, ShieldAlert, CheckCircle, CreditCard, AlertTriangle, Clock, Vote, X } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { obligationsApi, settingsApi } from '../../lib/api'
 import { useAuthStore } from '../../store/auth.store'
 import { PageHeader, DataTable } from '../../components/shared'
+import VotePanel from '../../components/shared/VotePanel'
 import type { Column } from '../../components/shared'
 import { formatDate } from '../../lib/utils'
 import type { RecurringObligation, ObligationCategory, ObligationPayment } from '../../types'
@@ -131,13 +132,29 @@ const FREQ_LABELS: Record<string, string> = {
   BIANNUALLY: 'Bi-annually', ANNUALLY: 'Annually', ONCE: 'One-time',
 }
 
+function VoteModal({ obl, onClose }: { obl: RecurringObligation; onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+      <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm mx-4 p-6 space-y-4 animate-scale-in">
+        <div className="flex items-center justify-between">
+          <h2 className="text-base font-semibold text-slate-800">{obl.name}</h2>
+          <button type="button" onClick={onClose} className="btn-icon"><X size={16} /></button>
+        </div>
+        <VotePanel entityType="Obligation" entityId={obl.id} />
+      </div>
+    </div>
+  )
+}
+
 export default function ObligationsListPage() {
   const navigate = useNavigate()
   const qc = useQueryClient()
   const { user } = useAuthStore()
+  const isDirector = user?.role === 'DIRECTOR'
   const [category, setCategory] = useState<ObligationCategory | ''>('')
   const [showInactive, setShowInactive] = useState(false)
   const [payingObl, setPayingObl] = useState<RecurringObligation | null>(null)
+  const [votingObl, setVotingObl] = useState<RecurringObligation | null>(null)
   const [toasts, setToasts] = useState<Toast[]>([])
 
   function addToast(message: string, type: 'success' | 'error') {
@@ -223,30 +240,43 @@ export default function ObligationsListPage() {
         </div>
       )
     }},
-    { accessor: 'payments', header: 'Pending', render: (_v, o) => {
-      const pending = (o.payments as ObligationPayment[] | undefined)?.find((p) => p.status === 'PENDING_APPROVAL')
-      if (!pending) return <span className="text-slate-300 text-xs">--</span>
-      return (
-        <div className="flex items-center gap-1.5">
-          <span className="text-xs text-amber-600 font-medium">Awaiting approval</span>
-          {user?.role !== 'CASHIER' && pending.createdById !== user?.id && (
-            <button
-              onClick={() => approveMutation.mutate({ oblId: o.id, paymentId: pending.id })}
-              className="flex items-center gap-1 text-xs text-emerald-700 hover:text-emerald-800 font-medium border border-emerald-300 rounded px-1.5 py-0.5 hover:bg-emerald-50"
-            >
-              <CheckCircle size={11} /> Approve
-            </button>
-          )}
-        </div>
-      )
-    }},
+    ...(!isDirector ? [{
+      accessor: 'payments' as keyof RecurringObligation,
+      header: 'Pending',
+      render: (_v: unknown, o: RecurringObligation) => {
+        const pending = (o.payments as ObligationPayment[] | undefined)?.find((p) => p.status === 'PENDING_APPROVAL')
+        if (!pending) return <span className="text-slate-300 text-xs">--</span>
+        return (
+          <div className="flex items-center gap-1.5">
+            <span className="text-xs text-amber-600 font-medium">Awaiting approval</span>
+            {user?.role !== 'CASHIER' && pending.createdById !== user?.id && (
+              <button
+                onClick={() => approveMutation.mutate({ oblId: o.id, paymentId: pending.id })}
+                className="flex items-center gap-1 text-xs text-emerald-700 hover:text-emerald-800 font-medium border border-emerald-300 rounded px-1.5 py-0.5 hover:bg-emerald-50"
+              >
+                <CheckCircle size={11} /> Approve
+              </button>
+            )}
+          </div>
+        )
+      },
+    }] : []),
     { accessor: 'id', header: '', render: (_v, o) => (
-      <button
-        onClick={() => setPayingObl(o)}
-        className="flex items-center gap-1 text-xs font-medium text-brand-700 hover:text-brand-800 border border-brand-300 rounded px-2 py-1 hover:bg-brand-50"
-      >
-        <CreditCard size={12} /> Pay
-      </button>
+      isDirector ? (
+        <button
+          onClick={() => setVotingObl(o)}
+          className="flex items-center gap-1 text-xs font-medium text-brand-700 hover:text-brand-800 border border-brand-300 rounded px-2 py-1 hover:bg-brand-50"
+        >
+          <Vote size={12} /> Vote
+        </button>
+      ) : (
+        <button
+          onClick={() => setPayingObl(o)}
+          className="flex items-center gap-1 text-xs font-medium text-brand-700 hover:text-brand-800 border border-brand-300 rounded px-2 py-1 hover:bg-brand-50"
+        >
+          <CreditCard size={12} /> Pay
+        </button>
+      )
     )},
   ]
 
@@ -257,9 +287,11 @@ export default function ObligationsListPage() {
           title="Recurring Obligations"
           subtitle="Insurance, taxes, permits, contracts and other periodic payments"
           action={
-            <button onClick={() => navigate('/obligations/new')} className="btn-primary flex items-center gap-2">
-              <Plus size={16} /> Add Obligation
-            </button>
+            !isDirector ? (
+              <button onClick={() => navigate('/obligations/new')} className="btn-primary flex items-center gap-2">
+                <Plus size={16} /> Add Obligation
+              </button>
+            ) : undefined
           }
         />
 
@@ -315,6 +347,10 @@ export default function ObligationsListPage() {
             addToast('Payment submitted for approval', 'success')
           }}
         />
+      )}
+
+      {votingObl && (
+        <VoteModal obl={votingObl} onClose={() => setVotingObl(null)} />
       )}
 
       <ToastContainer toasts={toasts} onRemove={(id) => setToasts((t) => t.filter((x) => x.id !== id))} />

@@ -6,6 +6,7 @@ import { documentsApi } from '../../lib/api'
 import { PageHeader, DataTable, Pagination } from '../../components/shared'
 import type { Column } from '../../components/shared'
 import { formatDate } from '../../lib/utils'
+import { useAuthStore } from '../../store/auth.store'
 import type { PolicyDocument, DocumentCategory } from '../../types'
 
 const CATEGORY_COLORS: Record<DocumentCategory, string> = {
@@ -20,6 +21,8 @@ const CATEGORY_COLORS: Record<DocumentCategory, string> = {
 
 export default function DocumentsListPage() {
   const navigate = useNavigate()
+  const { user } = useAuthStore()
+  const isDirector = user?.role === 'DIRECTOR'
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState<DocumentCategory | ''>('')
@@ -87,9 +90,11 @@ export default function DocumentsListPage() {
         title="Policy Documents"
         subtitle="School policies, guidelines, procedures, and official documents"
         action={
-          <button onClick={() => navigate('/documents/new')} className="btn-primary flex items-center gap-2">
-            <Plus size={16} /> Add Document
-          </button>
+          !isDirector ? (
+            <button onClick={() => navigate('/documents/new')} className="btn-primary flex items-center gap-2">
+              <Plus size={16} /> Add Document
+            </button>
+          ) : undefined
         }
       />
 

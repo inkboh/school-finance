@@ -51,6 +51,7 @@ const ROLE_DISPLAY: Record<string, string> = {
   FINANCE_MANAGER: 'Finance Manager',
   PRINCIPAL:       'Principal',
   AUDITOR:         'Auditor',
+  DIRECTOR:        'Director',
 };
 
 function isNavItemVisible(item: NavItem, role: string | undefined): boolean {
