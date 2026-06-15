@@ -34,4 +34,7 @@ COPY --from=builder /app/server/node_modules/ ./node_modules/
 # Prisma schema required by prisma db push at runtime
 COPY prisma/schema.prisma ./prisma/schema.prisma
 
+# Historical data for the importHistorical Lambda action
+COPY prisma/historical-data.json ./prisma/historical-data.json
+
 CMD ["lambda.handler"]

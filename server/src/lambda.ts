@@ -3,6 +3,7 @@ import serverlessHttp from 'serverless-http'
 import { execSync } from 'child_process'
 import * as bcrypt from 'bcryptjs'
 import { importDataHandler } from './handlers/import-data.handler'
+import { importHistoricalHandler } from './handlers/import-historical.handler'
 // app and prisma are NOT imported at module level — PrismaClient must be
 // constructed after DATABASE_URL is set by initialize(), not at cold-start.
 
@@ -49,10 +50,11 @@ export async function handler(event: unknown, context: unknown): Promise<unknown
   await initialize()
   const ev = event as Record<string, unknown> | null
   if (ev && typeof ev === 'object') {
-    if (ev['action'] === 'dbpush')           return dbPushHandler(ev as { action: string })
-    if (ev['action'] === 'seed')             return seedHandler()
-    if (ev['action'] === 'import')           return importDataHandler()
-    if (ev['action'] === 'cognitoBootstrap') return cognitoBootstrapHandler()
+    if (ev['action'] === 'dbpush')             return dbPushHandler(ev as { action: string })
+    if (ev['action'] === 'seed')               return seedHandler()
+    if (ev['action'] === 'import')             return importDataHandler()
+    if (ev['action'] === 'importHistorical')   return importHistoricalHandler()
+    if (ev['action'] === 'cognitoBootstrap')   return cognitoBootstrapHandler()
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return httpHandler(event as any, context as any)
