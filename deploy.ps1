@@ -141,8 +141,8 @@ if (Test-Path "$Root\cdk-outputs.json") {
 }
 
 if ($Setup) {
-    Write-Host "  Temp password for all users: School.Finance2025!" -ForegroundColor Cyan
-    Write-Host "  Users will be prompted to set a new password on first login." -ForegroundColor DarkGray
+    Write-Host "  Invitation emails sent to all users via Cognito." -ForegroundColor Cyan
+    Write-Host "  Each user will receive an email with a temporary password and must set their own on first login." -ForegroundColor DarkGray
 }
 
 Write-Host "  CloudFront can take 5-10 minutes to propagate globally." -ForegroundColor DarkGray

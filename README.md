@@ -150,7 +150,7 @@ All of the above, plus:
 - `seed` — inserts currencies, fee/expense categories, and user records
 - `import` — loads student data from the spreadsheet export
 - `importHistorical` — loads historical fee receipts and expenses
-- `cognitoBootstrap` — creates all DB users in Cognito (temp password: `School.Finance2025!`)
+- `cognitoBootstrap` — creates all DB users in Cognito and sends each user an invitation email with a Cognito-generated temporary password; users set their own permanent password on first login
 
 All Lambda actions are idempotent — safe to re-run; existing records are skipped.
 
@@ -164,7 +164,7 @@ The Lambda function accepts direct invocation for admin tasks. The `deploy.ps1` 
 | `{"action":"seed"}` | Seed currencies, categories, and users |
 | `{"action":"import"}` | Import student roster from spreadsheet data |
 | `{"action":"importHistorical"}` | Import historical fee receipts and expenses |
-| `{"action":"cognitoBootstrap"}` | Create/update all users in Cognito user pool |
+| `{"action":"cognitoBootstrap"}` | Create all users in Cognito and email each one an invitation with a temp password |
 
 ### Infrastructure (CDK — `infra/`)
 
@@ -178,7 +178,7 @@ The Lambda function accepts direct invocation for admin tasks. The `deploy.ps1` 
 | ACM | Wildcard cert `*.riverdalekumasi.com` (us-east-1) pinned to CloudFront |
 | S3 (uploads) | `schoolfinance-uploads-<account>` — document file attachments |
 | S3 (frontend) | `schoolfinance-frontend-<account>` — React SPA |
-| Cognito | User pool with `custom:role` attribute; self-signup disabled |
+| Cognito | User pool with `custom:role` attribute; self-signup disabled; users receive invitation email with temp password |
 | Secrets Manager | DB credentials, JWT secret, refresh secret |
 
 ### Estimated AWS cost (us-east-1)

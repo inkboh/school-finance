@@ -165,23 +165,20 @@ export async function seedHandler(): Promise<{ success: boolean; seeded?: string
 export async function cognitoBootstrapHandler(): Promise<{
   success: boolean
   users?: Array<{ email: string; status: string }>
-  tempPassword?: string
   error?: string
 }> {
   await initialize()
   const poolId = process.env.COGNITO_USER_POOL_ID
-  if (!poolId) return { success: false, error: 'COGNITO_USER_POOL_ID not set — deploy with Cognito first' }
+  if (!poolId) return { success: false, error: 'COGNITO_USER_POOL_ID not set - deploy with Cognito first' }
 
   const { PrismaClient } = await import('@prisma/client')
   const {
     CognitoIdentityProviderClient,
     AdminCreateUserCommand,
-    AdminSetUserPasswordCommand,
   } = await import('@aws-sdk/client-cognito-identity-provider')
 
   const db = new PrismaClient()
   const cog = new CognitoIdentityProviderClient({ region: process.env.AWS_REGION ?? 'us-east-1' })
-  const TEMP_PASSWORD = 'School.Finance2025!'
 
   try {
     const users = await db.user.findMany({ where: { isActive: true } })
@@ -192,7 +189,6 @@ export async function cognitoBootstrapHandler(): Promise<{
         await cog.send(new AdminCreateUserCommand({
           UserPoolId: poolId,
           Username: user.email,
-          MessageAction: 'SUPPRESS',
           UserAttributes: [
             { Name: 'email', Value: user.email },
             { Name: 'email_verified', Value: 'true' },
@@ -200,13 +196,7 @@ export async function cognitoBootstrapHandler(): Promise<{
             { Name: 'custom:role', Value: user.role },
           ],
         }))
-        await cog.send(new AdminSetUserPasswordCommand({
-          UserPoolId: poolId,
-          Username: user.email,
-          Password: TEMP_PASSWORD,
-          Permanent: false,
-        }))
-        results.push({ email: user.email, status: 'created' })
+        results.push({ email: user.email, status: 'invited' })
       } catch (err: unknown) {
         const e = err as { name?: string; message?: string }
         if (e.name === 'UsernameExistsException') {
@@ -217,7 +207,7 @@ export async function cognitoBootstrapHandler(): Promise<{
       }
     }
 
-    return { success: true, users: results, tempPassword: TEMP_PASSWORD }
+    return { success: true, users: results }
   } catch (err: unknown) {
     const e = err as { message?: string }
     return { success: false, error: e.message ?? 'Unknown error' }
