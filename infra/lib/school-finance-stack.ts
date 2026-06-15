@@ -8,6 +8,7 @@ import * as apigwv2 from 'aws-cdk-lib/aws-apigatewayv2'
 import * as integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations'
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront'
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins'
+import * as acm from 'aws-cdk-lib/aws-certificatemanager'
 import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager'
 import * as cognito from 'aws-cdk-lib/aws-cognito'
 import * as iam from 'aws-cdk-lib/aws-iam'
@@ -224,7 +225,14 @@ export class SchoolFinanceStack extends cdk.Stack {
 
     const s3Origin = origins.S3BucketOrigin.withOriginAccessControl(websiteBucket)
 
+    // Wildcard cert for *.riverdalekumasi.com — already issued in us-east-1
+    const certificate = acm.Certificate.fromCertificateArn(this, 'Certificate',
+      'arn:aws:acm:us-east-1:705285596598:certificate/86b5ed8e-116f-4361-beba-da2d592b7223'
+    )
+
     const distribution = new cloudfront.Distribution(this, 'Distribution', {
+      domainNames: ['adwuma.riverdalekumasi.com'],
+      certificate,
       defaultBehavior: {
         origin: s3Origin,
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
@@ -245,7 +253,7 @@ export class SchoolFinanceStack extends cdk.Stack {
         { httpStatus: 403, responseHttpStatus: 200, responsePagePath: '/index.html' },
         { httpStatus: 404, responseHttpStatus: 200, responsePagePath: '/index.html' },
       ],
-      priceClass: cloudfront.PriceClass.PRICE_CLASS_100, // US, Canada, Europe only — cheapest
+      priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
     })
 
     // Update Lambda to know the real CLIENT_URL (CloudFront domain)
