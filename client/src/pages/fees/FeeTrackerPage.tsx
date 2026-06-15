@@ -393,7 +393,7 @@ export default function FeeTrackerPage() {
 
   const months = tracker?.months ?? []
 
-  // Totals across all active students for this year
+  // Total unpaid month-slots across all active students this year
   const totalUnpaid = tracker
     ? months.reduce((sum, m) => sum + (tracker.summary[m]?.unpaid ?? 0), 0)
     : 0
@@ -462,7 +462,7 @@ export default function FeeTrackerPage() {
             <div className="text-center">
               <p className="text-xs text-slate-400 uppercase tracking-wider font-medium">Outstanding</p>
               <p className={['text-lg font-bold', totalUnpaid > 0 ? 'text-red-600' : 'text-slate-400'].join(' ')}>
-                {totalUnpaid} {totalUnpaid === 1 ? 'student' : 'students'}
+                {totalUnpaid} {totalUnpaid === 1 ? 'month unpaid' : 'months unpaid'}
               </p>
             </div>
           </div>
@@ -616,10 +616,10 @@ export default function FeeTrackerPage() {
             <AlertCircle size={18} className="mt-0.5 shrink-0 text-orange-500" />
             <div>
               <p className="text-sm font-semibold text-orange-800">
-                {totalUnpaid} outstanding payment{totalUnpaid !== 1 ? 's' : ''} this year
+                {totalUnpaid} unpaid {totalUnpaid === 1 ? 'month' : 'months'} across all students this year
               </p>
               <p className="mt-0.5 text-sm text-orange-700">
-                Contact the parent or guardian for each unpaid month. Use the{' '}
+                Contact the parent or guardian for each student with unpaid months. Use the{' '}
                 <strong className="font-semibold">+ Record</strong> button on any red cell to log a payment
                 once received — it will be queued for approval.
               </p>

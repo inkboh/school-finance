@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Plus, Eye, Search } from 'lucide-react'
 import { studentsApi } from '../../lib/api'
 import { PageHeader, DataTable, Pagination } from '../../components/shared'
 import type { Column } from '../../components/shared'
 import { formatDate } from '../../lib/utils'
 import type { Student, StudentStatus } from '../../types'
+import { useAuthStore } from '../../store/auth.store'
 
 const STATUS_COLORS: Record<StudentStatus, string> = {
   ACTIVE:    'bg-emerald-100 text-emerald-800 border border-emerald-200',
@@ -16,11 +17,13 @@ const STATUS_COLORS: Record<StudentStatus, string> = {
   SUSPENDED: 'bg-amber-100 text-amber-700 border border-amber-200',
 }
 
-const GRADES = ['Creche', 'Nursery 1', 'Nursery 2', 'KG 1', 'KG 2',
-  'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6']
+const GRADES = ['Creche', 'Nursery 1', 'Nursery 2', 'Kindergarten 1', 'Kindergarten 2']
 
 export default function StudentsListPage() {
   const navigate = useNavigate()
+  const qc = useQueryClient()
+  const { user } = useAuthStore()
+  const canEditGrade = user?.role === 'SUPER_ADMIN' || user?.role === 'FINANCE_MANAGER'
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
   const [grade, setGrade] = useState('')
@@ -42,10 +45,31 @@ export default function StudentsListPage() {
   const students: Student[] = data?.success ? (data.data as Student[]) : []
   const meta = data?.success ? data.meta : undefined
 
+  const gradeMutation = useMutation({
+    mutationFn: ({ id, grade }: { id: string; grade: string }) =>
+      studentsApi.update(id, { grade }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['students'] })
+      qc.invalidateQueries({ queryKey: ['student-stats'] })
+    },
+  })
+
   const columns: Column<Student>[] = [
     { accessor: 'studentId', header: 'Student ID', render: (_v, s) => <span className="font-mono text-xs font-semibold text-brand-700">{s.studentId}</span> },
     { accessor: 'lastName', header: 'Name', render: (_v, s) => <span className="font-medium text-slate-800">{s.lastName}, {s.firstName}</span> },
-    { accessor: 'grade', header: 'Grade', render: (_v, s) => <span className="text-slate-600">{s.grade}{s.section ? ` (${s.section})` : ''}</span> },
+    { accessor: 'grade', header: 'Grade', render: (_v, s) => canEditGrade ? (
+      <select
+        className="select select-sm py-0.5 text-sm"
+        value={s.grade}
+        onChange={(e) => gradeMutation.mutate({ id: s.id, grade: e.target.value })}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <option value="Unknown">— unassigned —</option>
+        {GRADES.map((g) => <option key={g} value={g}>{g}</option>)}
+      </select>
+    ) : (
+      <span className="text-slate-600">{s.grade}{s.section ? ` (${s.section})` : ''}</span>
+    )},
     { accessor: 'status', header: 'Status', render: (_v, s) => (
       <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${STATUS_COLORS[s.status]}`}>{s.status}</span>
     )},

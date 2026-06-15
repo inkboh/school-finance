@@ -24,8 +24,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>
 
-const GRADES = ['Crèche', 'Nursery 1', 'Nursery 2', 'KG 1', 'KG 2',
-  'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6']
+const GRADES = ['Creche', 'Nursery 1', 'Nursery 2', 'Kindergarten 1', 'Kindergarten 2']
 
 export default function NewStudentPage() {
   const navigate = useNavigate()

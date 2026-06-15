@@ -8,6 +8,7 @@ import { DataTable, FormField } from '../../components/shared'
 import type { Column } from '../../components/shared'
 import { formatDate, formatCurrency } from '../../lib/utils'
 import type { FeeReceipt, StudentStatus } from '../../types'
+import { useAuthStore } from '../../store/auth.store'
 
 const STATUS_COLORS: Record<StudentStatus, string> = {
   ACTIVE:    'bg-emerald-100 text-emerald-800 border border-emerald-200',
@@ -17,8 +18,7 @@ const STATUS_COLORS: Record<StudentStatus, string> = {
   SUSPENDED: 'bg-amber-100 text-amber-700 border border-amber-200',
 }
 
-const GRADES = ['Crèche', 'Nursery 1', 'Nursery 2', 'KG 1', 'KG 2',
-  'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6']
+const GRADES = ['Creche', 'Nursery 1', 'Nursery 2', 'Kindergarten 1', 'Kindergarten 2']
 
 interface FormValues {
   firstName: string; lastName: string; grade: string; section: string
@@ -30,6 +30,8 @@ export default function StudentDetailPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const qc = useQueryClient()
+  const { user } = useAuthStore()
+  const canEdit = user?.role === 'SUPER_ADMIN' || user?.role === 'FINANCE_MANAGER'
   const [editing, setEditing] = useState(false)
 
   const { data, isLoading } = useQuery({
@@ -110,7 +112,7 @@ export default function StudentDetailPage() {
             <p className="page-subtitle font-mono">{student.studentId} · {student.grade}{student.section ? ` (${student.section})` : ''}</p>
           </div>
         </div>
-        {!editing && (
+        {!editing && canEdit && (
           <button onClick={startEdit} className="btn-secondary flex items-center gap-2">
             <Edit2 size={15} /> Edit
           </button>
