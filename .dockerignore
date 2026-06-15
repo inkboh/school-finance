@@ -9,5 +9,6 @@ prisma/migrations
 prisma/*.py
 prisma/*.ts
 prisma/*.json
+!prisma/historical-data.json
 infra
 reference_docs
