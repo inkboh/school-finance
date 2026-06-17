@@ -13,8 +13,10 @@ import NewFeeReceiptPage from './pages/fees/NewFeeReceiptPage'
 import FeeReceiptDetailPage from './pages/fees/FeeReceiptDetailPage'
 import FeeTrackerPage from './pages/fees/FeeTrackerPage'
 import ExpensesListPage from './pages/expenses/ExpensesListPage'
+import ExpenseSummaryPage from './pages/expenses/ExpenseSummaryPage'
 import NewExpensePage from './pages/expenses/NewExpensePage'
 import ExpenseDetailPage from './pages/expenses/ExpenseDetailPage'
+import CashFlowPage from './pages/cashflow/CashFlowPage'
 import LoansListPage from './pages/loans/LoansListPage'
 import NewLoanPage from './pages/loans/NewLoanPage'
 import LoanDetailPage from './pages/loans/LoanDetailPage'
@@ -80,8 +82,12 @@ export default function App() {
             />
             <Route path="/fees/:id" element={<FeeReceiptDetailPage />} />
 
+            {/* Cash Flow */}
+            <Route path="/cashflow" element={<CashFlowPage />} />
+
             {/* Expenses */}
             <Route path="/expenses" element={<ExpensesListPage />} />
+            <Route path="/expenses/summary" element={<ExpenseSummaryPage />} />
             <Route
               path="/expenses/new"
               element={

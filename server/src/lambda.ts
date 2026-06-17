@@ -4,6 +4,9 @@ import { execSync } from 'child_process'
 import * as bcrypt from 'bcryptjs'
 import { importDataHandler } from './handlers/import-data.handler'
 import { importHistoricalHandler } from './handlers/import-historical.handler'
+import { linkHistoricalHandler } from './handlers/link-historical.handler'
+import { importDirectorContributionsHandler } from './handlers/import-director-contributions.handler'
+import { fixIsaacLoanHandler } from './handlers/fix-isaac-loan.handler'
 // app and prisma are NOT imported at module level — PrismaClient must be
 // constructed after DATABASE_URL is set by initialize(), not at cold-start.
 
@@ -54,6 +57,9 @@ export async function handler(event: unknown, context: unknown): Promise<unknown
     if (ev['action'] === 'seed')               return seedHandler()
     if (ev['action'] === 'import')             return importDataHandler()
     if (ev['action'] === 'importHistorical')   return importHistoricalHandler()
+    if (ev['action'] === 'linkHistorical')     return linkHistoricalHandler()
+    if (ev['action'] === 'importDirectors')    return importDirectorContributionsHandler()
+    if (ev['action'] === 'fixIsaacLoan')       return fixIsaacLoanHandler()
     if (ev['action'] === 'cognitoBootstrap')   return cognitoBootstrapHandler()
     if (ev['action'] === 'resendInvite')       return resendInviteHandler(ev as { email?: string })
   }

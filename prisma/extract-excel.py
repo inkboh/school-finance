@@ -9,7 +9,7 @@ import json, openpyxl
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
-EXCEL = ROOT / "reference_docs" / "riverdale-school-cash-flow.xlsx"
+EXCEL = ROOT / "reference_docs" / "updated_riverdale-school-cash-flow.xlsx"
 OUT   = ROOT / "prisma" / "historical-data.json"
 
 wb = openpyxl.load_workbook(str(EXCEL), data_only=True)
@@ -162,7 +162,9 @@ for row in rows_cf:
 # ── Expenses from cashflow 2025-2026 ─────────────────────────────────────────
 MONTHS_CF_2526 = [
     (2025, 9), (2025, 10), (2025, 11), (2025, 12),
-    (2026, 1), (2026, 2),
+    (2026, 1), (2026, 2), (2026, 3), (2026, 4),
+    (2026, 5), (2026, 6), (2026, 7), (2026, 8),
+    (2026, 9),
 ]
 
 ws_cf2 = wb["cashflow 20252026 "]

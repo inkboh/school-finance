@@ -73,6 +73,60 @@ export interface ExpenseCategory {
   children?: ExpenseCategory[]
 }
 
+export interface ExpenseSummaryRow {
+  id: string
+  name: string
+  parentId: string | null
+  level: number
+  totals: Record<string, number>
+  rowTotal: number
+}
+
+export interface ExpenseSummaryData {
+  year: string
+  months: string[]
+  rows: ExpenseSummaryRow[]
+  monthTotals: Record<string, number>
+  grandTotal: number
+}
+
+export interface CashFlowSimpleRow {
+  name: string
+  totals: Record<string, number>
+  rowTotal: number
+}
+
+export interface CashFlowExpenseRow {
+  id: string
+  name: string
+  parentId: string | null
+  level: number
+  totals: Record<string, number>
+  rowTotal: number
+}
+
+export interface CashFlowSummary {
+  year: string
+  months: string[]
+  cashIn: {
+    feeRows: CashFlowSimpleRow[]
+    directorRows: CashFlowSimpleRow[]
+    byMonth: Record<string, number>
+    total: number
+  }
+  cashOut: {
+    rows: CashFlowExpenseRow[]
+    repaymentRows: CashFlowSimpleRow[]
+    byMonth: Record<string, number>
+    total: number
+  }
+  net: {
+    byMonth: Record<string, number>
+    total: number
+  }
+  runningBalance: Record<string, number>
+}
+
 export interface FeeReceipt {
   id: string
   receiptNumber: string

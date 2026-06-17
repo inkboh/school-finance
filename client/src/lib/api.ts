@@ -8,6 +8,8 @@ import type {
   FeeReceipt,
   FeeTrackerData,
   Expense,
+  ExpenseSummaryData,
+  CashFlowSummary,
   Loan,
   LoanPayment,
   Currency,
@@ -179,6 +181,16 @@ export const expensesApi = {
 
   reject: (id: string, reason: string): Promise<ApiResponse<Expense>> =>
     api.post(`/expenses/${id}/reject`, { reason }).then((r) => r.data),
+
+  monthlySummary: (params?: { year?: string }): Promise<ApiResponse<ExpenseSummaryData>> =>
+    api.get('/expenses/monthly-summary', { params }).then((r) => r.data),
+}
+
+// ─── Cash Flow API ────────────────────────────────────────────────────────────
+
+export const cashflowApi = {
+  summary: (params?: { year?: string }): Promise<ApiResponse<CashFlowSummary>> =>
+    api.get('/cashflow/summary', { params }).then((r) => r.data),
 }
 
 // ─── Loans API ────────────────────────────────────────────────────────────────

@@ -20,6 +20,7 @@ import obligationsRoutes from './routes/obligations.routes'
 import projectsRoutes from './routes/projects.routes'
 import documentsRoutes from './routes/documents.routes'
 import votesRoutes from './routes/votes.routes'
+import cashflowRoutes from './routes/cashflow.routes'
 
 const app = express()
 const CLIENT_URL = process.env['CLIENT_URL'] ?? 'http://localhost:5173'
@@ -65,6 +66,7 @@ app.use('/api/obligations', obligationsRoutes)
 app.use('/api/projects', projectsRoutes)
 app.use('/api/documents', documentsRoutes)
 app.use('/api/votes', votesRoutes)
+app.use('/api/cashflow', cashflowRoutes)
 
 // Serve uploaded files in local dev only (production uses S3)
 if (process.env.NODE_ENV !== 'production') {

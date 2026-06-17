@@ -9,6 +9,7 @@ import {
   getExpense,
   approveExpense,
   rejectExpense,
+  getExpenseMonthlySummary,
 } from '../controllers/expenses.controller'
 
 const router = Router()
@@ -18,6 +19,9 @@ router.use(authenticate)
 
 // GET /api/expenses — all authenticated roles
 router.get('/', validateQuery(ExpenseListQuerySchema), listExpenses)
+
+// GET /api/expenses/monthly-summary — must come before /:id
+router.get('/monthly-summary', getExpenseMonthlySummary)
 
 // POST /api/expenses
 router.post('/', requireRole('FINANCE_MANAGER'), validate(CreateExpenseSchema), createExpense)
