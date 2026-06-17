@@ -96,6 +96,15 @@ export async function seedHandler(): Promise<{ success: boolean; seeded?: string
       update: {},
       create: { currencyId: ngn.id, rate: 0.00065, effectiveDate: new Date('2026-01-01T00:00:00.000Z') },
     })
+    // USD/GHS rate — 1 USD = ~15.5 GHS (Jun 2025); update via Settings > Exchange Rates as needed
+    const usd = await db.currency.findUnique({ where: { code: 'USD' } })
+    if (usd) {
+      await db.exchangeRate.upsert({
+        where: { currencyId_effectiveDate: { currencyId: usd.id, effectiveDate: new Date('2025-06-01T00:00:00.000Z') } },
+        update: {},
+        create: { currencyId: usd.id, rate: 15.5, effectiveDate: new Date('2025-06-01T00:00:00.000Z') },
+      })
+    }
     seeded.push('currencies')
 
     for (const cat of [

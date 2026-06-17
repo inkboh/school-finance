@@ -8,8 +8,10 @@ import {
   Plus,
   ArrowDownCircle,
   ArrowUpCircle,
+  ChevronDown,
+  ChevronRight,
 } from 'lucide-react'
-import { loansApi } from '../../lib/api'
+import { loansApi, settingsApi } from '../../lib/api'
 import { formatCurrency, formatDate } from '../../lib/utils'
 import {
   PageHeader,
@@ -93,6 +95,213 @@ function Tab({ active, onClick, icon, label, sublabel }: TabProps) {
   )
 }
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function toMonthStr(dateStr: string): string {
+  const d = new Date(dateStr)
+  return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`
+}
+
+function monthLabel(m: string): string {
+  const [y, mo] = m.split('-')
+  if (!y || !mo) return m
+  return new Date(Number(y), Number(mo) - 1, 1).toLocaleString('en-GB', { month: 'short', year: '2-digit' })
+}
+
+function fmtGHS(n: number): string {
+  if (n === 0) return '—'
+  return `₵${n.toLocaleString('en-GH', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
+}
+
+function fmtUSD(ghsAmount: number, usdRate: number): string {
+  if (ghsAmount === 0 || usdRate <= 0) return ''
+  const usd = ghsAmount / usdRate
+  return `≈$${usd.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
+}
+
+function DualAmount({ ghs, usdRate, bold }: { ghs: number; usdRate: number; bold?: boolean }) {
+  if (ghs === 0) return <span className="text-slate-300">—</span>
+  return (
+    <span className="flex flex-col items-end">
+      <span className={bold ? 'font-bold' : 'font-medium'}>{fmtGHS(ghs)}</span>
+      {usdRate > 0 && (
+        <span className="text-[10px] text-slate-400 leading-none">{fmtUSD(ghs, usdRate)}</span>
+      )}
+    </span>
+  )
+}
+
+// ─── Director contribution matrix (BORROWED tab) ──────────────────────────────
+
+function DirectorMatrix({
+  loans,
+  onView,
+  usdRate,
+}: {
+  loans: Loan[]
+  onView: (id: string) => void
+  usdRate: number
+}) {
+  const [showRecords, setShowRecords] = useState(false)
+
+  // All months with any contribution, sorted
+  const allMonths = [...new Set(loans.map((l) => toMonthStr(l.loanDate as unknown as string)))].sort()
+
+  // All directors, sorted
+  const directors = [...new Set(loans.map((l) => l.partyName))].sort()
+
+  // Build matrix + per-director aggregates
+  const matrix: Record<string, Record<string, number>> = {}
+  const totalByParty: Record<string, number> = {}
+  const repaidByParty: Record<string, number> = {}
+  const outstandingByParty: Record<string, number> = {}
+
+  for (const loan of loans) {
+    const p   = loan.partyName
+    const m   = toMonthStr(loan.loanDate as unknown as string)
+    if (!matrix[p]) matrix[p] = {}
+    matrix[p][m]            = (matrix[p][m]            ?? 0) + Number(loan.principal)
+    totalByParty[p]         = (totalByParty[p]         ?? 0) + Number(loan.principal)
+    repaidByParty[p]        = (repaidByParty[p]        ?? 0) + Number(loan.totalPaid  ?? 0)
+    outstandingByParty[p]   = (outstandingByParty[p]   ?? 0) + Number(loan.outstanding ?? 0)
+  }
+
+  const monthTotals: Record<string, number> = {}
+  for (const m of allMonths) {
+    monthTotals[m] = directors.reduce((s, p) => s + (matrix[p]?.[m] ?? 0), 0)
+  }
+  const grandTotal       = Object.values(totalByParty).reduce((a, b) => a + b, 0)
+  const grandRepaid      = Object.values(repaidByParty).reduce((a, b) => a + b, 0)
+  const grandOutstanding = Object.values(outstandingByParty).reduce((a, b) => a + b, 0)
+
+  return (
+    <div className="space-y-4 p-4">
+      {/* Matrix table */}
+      <div className="overflow-x-auto rounded-xl border border-slate-200">
+        <table className="min-w-full border-collapse">
+          <thead>
+            <tr className="bg-slate-900 text-white">
+              <th className="sticky left-0 z-20 bg-slate-900 border-r border-slate-700 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider whitespace-nowrap min-w-[160px]">
+                Director
+              </th>
+              {allMonths.map((m) => (
+                <th key={m} className="px-3 py-3 text-right text-xs font-semibold uppercase tracking-wider whitespace-nowrap w-24">
+                  {monthLabel(m)}
+                </th>
+              ))}
+              <th className="border-l border-slate-700 px-3 py-3 text-right text-xs font-semibold uppercase tracking-wider whitespace-nowrap">
+                Contributed
+              </th>
+              <th className="px-3 py-3 text-right text-xs font-semibold uppercase tracking-wider whitespace-nowrap text-emerald-400">
+                Repaid
+              </th>
+              <th className="px-3 py-3 text-right text-xs font-semibold uppercase tracking-wider whitespace-nowrap text-amber-400">
+                Outstanding
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-100">
+            {directors.map((director) => (
+              <tr key={director} className="hover:bg-slate-50">
+                <td className="sticky left-0 z-10 bg-white border-r border-slate-100 px-4 py-3 text-sm font-semibold text-slate-800 whitespace-nowrap">
+                  {director}
+                </td>
+                {allMonths.map((m) => {
+                  const v = matrix[director]?.[m] ?? 0
+                  return (
+                    <td key={m} className={['px-3 py-3 text-right text-sm tabular-nums', v > 0 ? 'text-slate-800' : 'text-slate-300'].join(' ')}>
+                      {fmtGHS(v)}
+                    </td>
+                  )
+                })}
+                <td className="border-l border-slate-100 px-3 py-3 text-right tabular-nums text-slate-900">
+                  <DualAmount ghs={totalByParty[director] ?? 0} usdRate={usdRate} bold />
+                </td>
+                <td className="px-3 py-3 text-right tabular-nums text-emerald-700">
+                  <DualAmount ghs={repaidByParty[director] ?? 0} usdRate={usdRate} />
+                </td>
+                <td className={['px-3 py-3 text-right tabular-nums', (outstandingByParty[director] ?? 0) > 0 ? 'text-amber-700' : 'text-slate-400'].join(' ')}>
+                  <DualAmount ghs={outstandingByParty[director] ?? 0} usdRate={usdRate} bold />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+          <tfoot>
+            <tr className="bg-slate-800 text-white">
+              <td className="sticky left-0 z-10 bg-slate-800 border-r border-slate-700 px-4 py-3 text-xs font-bold uppercase tracking-wide whitespace-nowrap">
+                Total
+              </td>
+              {allMonths.map((m) => (
+                <td key={m} className={['px-3 py-3 text-right text-sm font-bold tabular-nums', (monthTotals[m] ?? 0) === 0 ? 'opacity-40' : ''].join(' ')}>
+                  {fmtGHS(monthTotals[m] ?? 0)}
+                </td>
+              ))}
+              <td className="border-l border-slate-700 px-3 py-3 text-right tabular-nums">
+                <DualAmount ghs={grandTotal} usdRate={usdRate} bold />
+              </td>
+              <td className="px-3 py-3 text-right tabular-nums text-emerald-400">
+                <DualAmount ghs={grandRepaid} usdRate={usdRate} bold />
+              </td>
+              <td className={['px-3 py-3 text-right tabular-nums', grandOutstanding > 0 ? 'text-amber-400' : 'opacity-40'].join(' ')}>
+                <DualAmount ghs={grandOutstanding} usdRate={usdRate} bold />
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      {/* Expandable individual records */}
+      <div>
+        <button
+          type="button"
+          onClick={() => setShowRecords((v) => !v)}
+          className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-700"
+        >
+          {showRecords ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
+          {showRecords ? 'Hide' : 'Show'} individual loan records ({loans.length})
+        </button>
+        {showRecords && (
+          <div className="mt-3 overflow-x-auto rounded-lg border border-slate-100">
+            <table className="min-w-full divide-y divide-slate-100 text-sm">
+              <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
+                <tr>
+                  {['Loan #', 'Director', 'Date', 'Principal', 'Repaid', 'Outstanding', 'Status', ''].map((h) => (
+                    <th key={h} className="px-3 py-2 text-left font-semibold">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-50">
+                {loans.map((loan) => (
+                  <tr key={loan.id} className="hover:bg-slate-50">
+                    <td className="px-3 py-2 font-mono text-xs text-slate-500">{loan.loanNumber}</td>
+                    <td className="px-3 py-2 font-medium text-slate-800">{loan.partyName}</td>
+                    <td className="px-3 py-2 text-slate-600">{formatDate(loan.loanDate as unknown as string)}</td>
+                    <td className="px-3 py-2 tabular-nums">{fmtGHS(Number(loan.principal))}</td>
+                    <td className="px-3 py-2 tabular-nums text-emerald-700">{fmtGHS(Number(loan.totalPaid ?? 0))}</td>
+                    <td className={['px-3 py-2 tabular-nums font-semibold', Number(loan.outstanding ?? 0) > 0 ? 'text-amber-700' : 'text-slate-400'].join(' ')}>
+                      {fmtGHS(Number(loan.outstanding ?? 0))}
+                    </td>
+                    <td className="px-3 py-2"><StatusBadge status={loan.status as LoanStatus} /></td>
+                    <td className="px-3 py-2">
+                      <button
+                        type="button"
+                        onClick={() => onView(loan.id)}
+                        className="inline-flex items-center gap-1 rounded border border-slate-200 bg-white px-2 py-1 text-xs text-slate-600 hover:border-brand-400 hover:text-brand-700"
+                      >
+                        <Eye size={11} /> View
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 // ─── Main page ────────────────────────────────────────────────────────────────
 
 export default function LoansListPage() {
@@ -109,6 +318,19 @@ export default function LoansListPage() {
     queryFn: () =>
       loansApi.list(statusFilter ? { status: statusFilter } : {}),
   })
+
+  const { data: ratesRes } = useQuery({
+    queryKey: ['exchange-rates'],
+    queryFn: () => settingsApi.exchangeRates(),
+    staleTime: 5 * 60 * 1000,
+  })
+
+  // Find the most recent USD rate (rate = GHS per 1 USD)
+  const usdRate: number = (() => {
+    const rates = ratesRes?.success ? (ratesRes.data as Array<{ rate: number; currency: { code: string }; effectiveDate: string }>) : []
+    const usdRates = rates.filter((r) => r.currency.code === 'USD').sort((a, b) => new Date(b.effectiveDate).getTime() - new Date(a.effectiveDate).getTime())
+    return usdRates[0] ? Number(usdRates[0].rate) : 0
+  })()
 
   const allLoans: Loan[] =
     allLoansRes?.success ? (allLoansRes.data as Loan[]) : []
@@ -268,28 +490,33 @@ export default function LoansListPage() {
       />
 
       {/* Summary bar */}
+      {usdRate > 0 && (
+        <p className="text-xs text-slate-400">
+          USD rate: 1 USD = ₵{usdRate.toLocaleString('en-GH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} GHS
+        </p>
+      )}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <MiniCard
           label="Total Borrowed"
-          value={fmt(totalBorrowed)}
+          value={`${fmt(totalBorrowed)}${usdRate > 0 ? `  /  ${fmtUSD(totalBorrowed, usdRate)}` : ''}`}
           accent="bg-red-500"
           icon={<TrendingDown size={18} />}
         />
         <MiniCard
           label="Outstanding Borrowed"
-          value={fmt(outstandingBorrowed)}
+          value={`${fmt(outstandingBorrowed)}${usdRate > 0 ? `  /  ${fmtUSD(outstandingBorrowed, usdRate)}` : ''}`}
           accent="bg-orange-500"
           icon={<ArrowDownCircle size={18} />}
         />
         <MiniCard
           label="Total Lent"
-          value={fmt(totalLent)}
+          value={`${fmt(totalLent)}${usdRate > 0 ? `  /  ${fmtUSD(totalLent, usdRate)}` : ''}`}
           accent="bg-emerald-500"
           icon={<TrendingUp size={18} />}
         />
         <MiniCard
           label="Outstanding Lent"
-          value={fmt(outstandingLent)}
+          value={`${fmt(outstandingLent)}${usdRate > 0 ? `  /  ${fmtUSD(outstandingLent, usdRate)}` : ''}`}
           accent="bg-teal-500"
           icon={<ArrowUpCircle size={18} />}
         />
@@ -336,20 +563,26 @@ export default function LoansListPage() {
           </div>
         </div>
 
-        {/* Table */}
-        <div className="p-4">
-          <DataTable
-            columns={columns}
-            data={tableData}
-            isLoading={isLoading}
-            rowKey={(row) => row.id}
-            emptyMessage={
-              activeTab === 'BORROWED'
-                ? 'No borrowed loans found.'
-                : 'No lent loans found.'
-            }
-          />
-        </div>
+        {/* Table / Matrix */}
+        {activeTab === 'BORROWED' ? (
+          isLoading ? (
+            <div className="flex items-center justify-center py-16 text-slate-400 text-sm">Loading…</div>
+          ) : borrowed.length === 0 ? (
+            <div className="p-8 text-center text-sm text-slate-400">No borrowed loans found.</div>
+          ) : (
+            <DirectorMatrix loans={borrowed} onView={(id) => navigate(`/loans/${id}`)} usdRate={usdRate} />
+          )
+        ) : (
+          <div className="p-4">
+            <DataTable
+              columns={columns}
+              data={tableData}
+              isLoading={isLoading}
+              rowKey={(row) => row.id}
+              emptyMessage="No lent loans found."
+            />
+          </div>
+        )}
       </div>
     </div>
   )
