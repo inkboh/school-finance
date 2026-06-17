@@ -36,22 +36,26 @@ const LOAN_STATUSES: { value: LoanStatus | ''; label: string }[] = [
 
 interface MiniCardProps {
   label: string
-  value: string
+  ghs: number
+  usdRate: number
   accent: string
   icon: React.ReactNode
 }
 
-function MiniCard({ label, value, accent, icon }: MiniCardProps) {
+function MiniCard({ label, ghs, usdRate, accent, icon }: MiniCardProps) {
   return (
     <div className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white px-5 py-4 shadow-sm">
-      <div
-        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white ${accent}`}
-      >
+      <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white ${accent}`}>
         {icon}
       </div>
       <div className="min-w-0">
         <p className="truncate text-xs font-medium text-slate-500">{label}</p>
-        <p className="mt-0.5 truncate text-lg font-bold text-slate-900">{value}</p>
+        <p className="mt-0.5 text-lg font-bold text-slate-900">
+          {ghs > 0 ? fmtGHS(ghs) : '₵0'}
+        </p>
+        {usdRate > 0 && ghs > 0 && (
+          <p className="text-xs text-slate-400">{fmtUSD(ghs, usdRate)}</p>
+        )}
       </div>
     </div>
   )
@@ -359,6 +363,7 @@ export default function LoansListPage() {
   const symbol = allLoans[0]?.currency?.symbol ?? '$'
   const code = allLoans[0]?.currency?.code ?? ''
 
+  // fmt kept for LENT table column
   const fmt = (n: number) => (code ? formatCurrency(n, symbol, code) : n.toLocaleString())
 
   // ─── Table columns ────────────────────────────────────────────────────────
@@ -490,37 +495,15 @@ export default function LoansListPage() {
       />
 
       {/* Summary bar */}
-      {usdRate > 0 && (
-        <p className="text-xs text-slate-400">
-          USD rate: 1 USD = ₵{usdRate.toLocaleString('en-GH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} GHS
-        </p>
-      )}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <MiniCard
-          label="Total Borrowed"
-          value={`${fmt(totalBorrowed)}${usdRate > 0 ? `  /  ${fmtUSD(totalBorrowed, usdRate)}` : ''}`}
-          accent="bg-red-500"
-          icon={<TrendingDown size={18} />}
-        />
-        <MiniCard
-          label="Outstanding Borrowed"
-          value={`${fmt(outstandingBorrowed)}${usdRate > 0 ? `  /  ${fmtUSD(outstandingBorrowed, usdRate)}` : ''}`}
-          accent="bg-orange-500"
-          icon={<ArrowDownCircle size={18} />}
-        />
-        <MiniCard
-          label="Total Lent"
-          value={`${fmt(totalLent)}${usdRate > 0 ? `  /  ${fmtUSD(totalLent, usdRate)}` : ''}`}
-          accent="bg-emerald-500"
-          icon={<TrendingUp size={18} />}
-        />
-        <MiniCard
-          label="Outstanding Lent"
-          value={`${fmt(outstandingLent)}${usdRate > 0 ? `  /  ${fmtUSD(outstandingLent, usdRate)}` : ''}`}
-          accent="bg-teal-500"
-          icon={<ArrowUpCircle size={18} />}
-        />
+        <MiniCard label="Total Borrowed"      ghs={totalBorrowed}      usdRate={usdRate} accent="bg-red-500"     icon={<TrendingDown size={18} />} />
+        <MiniCard label="Outstanding Borrowed" ghs={outstandingBorrowed} usdRate={usdRate} accent="bg-orange-500" icon={<ArrowDownCircle size={18} />} />
+        <MiniCard label="Total Lent"           ghs={totalLent}           usdRate={usdRate} accent="bg-emerald-500" icon={<TrendingUp size={18} />} />
+        <MiniCard label="Outstanding Lent"     ghs={outstandingLent}     usdRate={usdRate} accent="bg-teal-500"   icon={<ArrowUpCircle size={18} />} />
       </div>
+      {usdRate > 0 && (
+        <p className="text-xs text-slate-400">USD amounts use rate: 1 USD = ₵{usdRate.toFixed(2)}</p>
+      )}
 
       {/* Tabs + filter */}
       <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
