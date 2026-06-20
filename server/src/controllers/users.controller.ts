@@ -6,6 +6,7 @@ import {
   AdminUpdateUserAttributesCommand,
   AdminEnableUserCommand,
   AdminDisableUserCommand,
+  ListUsersCommand,
 } from '@aws-sdk/client-cognito-identity-provider'
 import { prisma } from '../services/prisma.service'
 import { hashPassword } from '../services/auth.service'
@@ -49,9 +50,24 @@ export const listUsers = async (req: AuthRequest, res: Response): Promise<void> 
       prisma.user.count(),
     ])
 
+    let cognitoStatuses: Record<string, string> = {}
+    const cog = getCognito()
+    if (cog) {
+      try {
+        const result = await cog.client.send(new ListUsersCommand({ UserPoolId: cog.poolId }))
+        cognitoStatuses = Object.fromEntries(
+          (result.Users ?? []).map(u => [u.Username ?? '', u.UserStatus ?? 'UNKNOWN'])
+        )
+      } catch (err) {
+        console.error('[users.listUsers] Cognito status fetch failed:', err)
+      }
+    }
+
+    const enriched = users.map(u => ({ ...u, cognitoStatus: cognitoStatuses[u.email] ?? null }))
+
     res.json({
       success: true,
-      data: users,
+      data: enriched,
       meta: { page, limit, total, totalPages: Math.ceil(total / limit) },
     })
   } catch (err) {

@@ -45,6 +45,7 @@ export interface User {
   role: Role
   isActive: boolean
   createdAt: string
+  cognitoStatus?: string | null
 }
 
 export interface Currency {
