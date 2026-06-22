@@ -70,7 +70,7 @@ const DATA_2526: [string, MonthlyPayment[]][] = [
   ['Carysel Kwarteng',                    [      null,  null,  null,  null,   400,   400,   400,   400,   400,  null,  null]],
   ['Ciara',                               [      null,  null,  null,  null,  null,   400,   400,   400,   400,  null,  null]],
   ['Boatemaa',                            [      null,  null,  null,  null,  null,   400,   400,   400,   400,  null,  null]],
-  ['Liana',                               [      null,  null,  null,  null,   400,   400,     0,     0,     0,  null,  null]],
+  ['Liana',                               [      null,  null,  null,  null,   400,   400,   400,   400,   400,  null,  null]],
 ]
 
 function splitName(full: string): { firstName: string; lastName: string } {
